@@ -47,7 +47,7 @@ class NovelDetailScreen extends ConsumerWidget {
                   const SizedBox(height: 24),
                   Text(
                     'Belum ada bab',
-                    style: GoogleFonts.poppins(
+                    style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
                       color: colorScheme.onSurface,
@@ -56,7 +56,7 @@ class NovelDetailScreen extends ConsumerWidget {
                   const SizedBox(height: 8),
                   Text(
                     'Buat bab pertama untuk memulai menulis',
-                    style: GoogleFonts.poppins(
+                    style: TextStyle(
                       fontSize: 14,
                       color: colorScheme.onSurfaceVariant,
                     ),
@@ -103,7 +103,7 @@ class NovelDetailScreen extends ConsumerWidget {
           backgroundColor: colorScheme.primaryContainer,
           child: Text(
             '${chapter.number}',
-            style: GoogleFonts.poppins(
+            style: TextStyle(
               fontWeight: FontWeight.w700,
               color: colorScheme.onPrimaryContainer,
             ),

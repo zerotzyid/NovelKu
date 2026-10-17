@@ -163,7 +163,7 @@ class _StoryBibleScreenState extends ConsumerState<StoryBibleScreen>
       children: [
         Text(
           title,
-          style: GoogleFonts.poppins(
+          style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
             color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -193,7 +193,7 @@ class _StoryBibleScreenState extends ConsumerState<StoryBibleScreen>
       children: [
         Text(
           label,
-          style: GoogleFonts.poppins(
+          style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
             color: Theme.of(context).colorScheme.onSurfaceVariant,

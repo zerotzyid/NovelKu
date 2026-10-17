@@ -81,7 +81,7 @@ class _NovelCreateScreenState extends ConsumerState<NovelCreateScreen> {
           children: [
             Text(
               'Informasi Novel',
-              style: GoogleFonts.poppins(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
                 color: colorScheme.onSurface,
@@ -106,7 +106,7 @@ class _NovelCreateScreenState extends ConsumerState<NovelCreateScreen> {
             const SizedBox(height: 24),
             Text(
               'Genre & Tema',
-              style: GoogleFonts.poppins(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
                 color: colorScheme.onSurface,
@@ -127,7 +127,7 @@ class _NovelCreateScreenState extends ConsumerState<NovelCreateScreen> {
             const SizedBox(height: 24),
             Text(
               'Latar Belakang Cerita',
-              style: GoogleFonts.poppins(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
                 color: colorScheme.onSurface,
@@ -156,7 +156,7 @@ class _NovelCreateScreenState extends ConsumerState<NovelCreateScreen> {
                 onPressed: _createNovel,
                 child: Text(
                   'Buat Novel',
-                  style: GoogleFonts.poppins(
+                  style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
                   ),

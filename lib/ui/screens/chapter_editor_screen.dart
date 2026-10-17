@@ -113,7 +113,7 @@ class _ChapterEditorScreenState extends ConsumerState<ChapterEditorScreen> {
                   children: [
                     Text(
                       '${_contentController.text.split(' ').length} kata',
-                      style: GoogleFonts.poppins(
+                      style: TextStyle(
                         fontSize: 12,
                         color: colorScheme.onSurfaceVariant,
                       ),
@@ -168,7 +168,7 @@ class _ChapterEditorScreenState extends ConsumerState<ChapterEditorScreen> {
                         Expanded(
                           child: Text(
                             'Hasil AI siap diterapkan',
-                            style: GoogleFonts.poppins(
+                            style: TextStyle(
                               fontSize: 12,
                               color: Colors.green.shade700,
                             ),
@@ -215,7 +215,7 @@ class _ChapterEditorScreenState extends ConsumerState<ChapterEditorScreen> {
           children: [
             Text(
               'Tulis dengan AI',
-              style: GoogleFonts.poppins(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
               ),

@@ -16,7 +16,7 @@ class AIActionButton extends StatelessWidget {
       icon: Icon(icon, size: 18, color: colorScheme.primary),
       label: Text(
         label,
-        style: GoogleFonts.poppins(
+        style: TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.w500,
           color: colorScheme.primary,
@@ -55,7 +55,7 @@ class AIStreamingText extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: GoogleFonts.poppins(
+        style: TextStyle(
           color: isComplete ? Colors.green.shade800 : Colors.blue.shade800,
           fontSize: 13,
         ),

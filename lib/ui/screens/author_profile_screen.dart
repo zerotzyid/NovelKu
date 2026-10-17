@@ -107,7 +107,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
           children: [
             Text(
               'Profil Penulisan',
-              style: GoogleFonts.poppins(
+              style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
                 color: colorScheme.onSurface,
@@ -116,7 +116,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
             const SizedBox(height: 8),
             Text(
               'Atur gaya penulisan yang menjadi pedoman AI',
-              style: GoogleFonts.poppins(
+              style: TextStyle(
                 fontSize: 14,
                 color: colorScheme.onSurfaceVariant,
               ),
@@ -138,7 +138,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
             const SizedBox(height: 12),
             Text(
               'Pilih satu atau lebih gaya yang Anda sukai',
-              style: GoogleFonts.poppins(
+              style: TextStyle(
                 fontSize: 12,
                 color: colorScheme.onSurfaceVariant,
               ),
@@ -175,7 +175,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
             const SizedBox(height: 12),
             Text(
               'Contoh: Tulis dengan bahasa Indonesia yang natural, dialog tidak kaku, deskripsi secukupnya',
-              style: GoogleFonts.poppins(
+              style: TextStyle(
                 fontSize: 12,
                 color: colorScheme.onSurfaceVariant,
               ),
@@ -250,7 +250,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
   Widget _buildSectionTitle(String title) {
     return Text(
       title,
-      style: GoogleFonts.poppins(
+      style: TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w700,
         color: Theme.of(context).colorScheme.onSurface,
@@ -339,7 +339,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
       children: [
         Text(
           label + (required ? ' *' : ''),
-          style: GoogleFonts.poppins(
+          style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
             color: Theme.of(context).colorScheme.onSurfaceVariant,

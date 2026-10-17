@@ -73,7 +73,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
           children: [
             Text(
               'Konfigurasi AI',
-              style: GoogleFonts.poppins(
+              style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
                 color: colorScheme.onSurface,
@@ -82,7 +82,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
             const SizedBox(height: 8),
             Text(
               'Pilih penyedia AI untuk menghasilkan bab novel',
-              style: GoogleFonts.poppins(
+              style: TextStyle(
                 fontSize: 14,
                 color: colorScheme.onSurfaceVariant,
               ),
@@ -209,7 +209,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
                 children: [
                   Text(
                     'Pengaturan Lanjutan',
-                    style: GoogleFonts.poppins(
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                       color: colorScheme.onSurface,
@@ -247,7 +247,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
               const SizedBox(height: 8),
               Text(
                 _testResult!,
-                style: GoogleFonts.poppins(
+                style: TextStyle(
                   fontSize: 12,
                   color: _testResult!.toLowerCase().contains('berhasil') ||
                           _testResult!.toLowerCase().contains('sukses')
@@ -266,7 +266,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
                 onPressed: _isTesting ? null : () => _save(config, notifier),
                 child: Text(
                   'Simpan Konfigurasi & Mulai Menulis',
-                  style: GoogleFonts.poppins(
+                  style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
                   ),
@@ -282,7 +282,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
   Widget _buildSectionTitle(String title) {
     return Text(
       title,
-      style: GoogleFonts.poppins(
+      style: TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w700,
         color: Theme.of(context).colorScheme.onSurface,
@@ -312,7 +312,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
               const SizedBox(width: 6),
               Text(
                 label,
-                style: GoogleFonts.poppins(
+                style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                   color: selected ? colorScheme.onPrimary : colorScheme.onSurface,
@@ -324,7 +324,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
             const SizedBox(height: 4),
             Text(
               subtitle,
-              style: GoogleFonts.poppins(
+              style: TextStyle(
                 fontSize: 11,
                 color: selected ? colorScheme.onPrimary.withOpacity(0.8) : colorScheme.onSurfaceVariant,
               ),
@@ -346,7 +346,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
       children: [
         Text(
           'Mode Lanjutan',
-          style: GoogleFonts.poppins(
+          style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
             color: colorScheme.onSurface,
