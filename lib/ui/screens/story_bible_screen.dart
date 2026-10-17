@@ -6,7 +6,6 @@ import '../../models/author_profile_model.dart';
 import '../../providers/app_providers.dart';
 import '../theme/app_theme.dart';
 import 'author_profile_screen.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class StoryBibleScreen extends ConsumerStatefulWidget {
   final String novelId;

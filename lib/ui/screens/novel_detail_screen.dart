@@ -7,7 +7,6 @@ import '../../providers/app_providers.dart';
 import '../theme/app_theme.dart';
 import 'ai_settings_screen.dart';
 import 'chapter_editor_screen.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class NovelDetailScreen extends ConsumerWidget {
   final NovelModel novel;

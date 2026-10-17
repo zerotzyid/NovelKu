@@ -7,7 +7,6 @@ import '../theme/app_theme.dart';
 import 'ai_settings_screen.dart';
 import 'novel_create_screen.dart';
 import 'novel_detail_screen.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});

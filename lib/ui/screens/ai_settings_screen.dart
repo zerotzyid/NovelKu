@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/ai_config_model.dart';
 import '../providers/app_providers.dart';
 import '../theme/app_theme.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AISettingsScreen extends ConsumerStatefulWidget {
   const AISettingsScreen({super.key});
