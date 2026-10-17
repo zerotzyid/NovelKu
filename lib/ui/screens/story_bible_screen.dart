@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../providers/app_providers.dart';
+import '../../models/author_profile_model.dart';
 import 'author_profile_screen.dart';
 
 class StoryBibleScreen extends ConsumerStatefulWidget {
