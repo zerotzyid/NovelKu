@@ -121,7 +121,6 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
                 'Custom LLM API',
                 Icons.extension_outlined,
                 'Endpoint OpenAI-compatible sendiri',
-                fullWidth: true,
               ),
             ),
             const SizedBox(height: 24),

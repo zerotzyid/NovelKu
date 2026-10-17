@@ -52,7 +52,6 @@ class AppTheme {
       ),
       cardTheme: CardTheme(
         elevation: 0,
-        surfaceTintColor: colorScheme.primaryContainer,
         clipBehavior: Clip.antiAlias,
         margin: const EdgeInsets.all(8),
       ),
@@ -63,7 +62,7 @@ class AppTheme {
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: colorScheme.surfaceContainerHighest,
+        fillColor: colorScheme.surfaceVariant,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
@@ -105,7 +104,7 @@ class AppTheme {
       ),
       segmentedButtonTheme: SegmentedButtonThemeData(
         style: SegmentedButton.styleFrom(
-          backgroundColor: colorScheme.surfaceContainerHighest,
+          backgroundColor: colorScheme.surfaceVariant,
           foregroundColor: colorScheme.onSurface,
           selectedBackgroundColor: colorScheme.primary,
           selectedForegroundColor: colorScheme.onPrimary,
@@ -125,7 +124,6 @@ class AppTheme {
         selectedItemColor: colorScheme.primary,
         unselectedItemColor: colorScheme.onSurfaceVariant,
         elevation: 0,
-        surfaceTintColor: Colors.transparent,
       ),
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: colorScheme.surface,
@@ -145,13 +143,12 @@ class AppTheme {
       colorScheme: colorScheme,
       cardTheme: CardTheme(
         elevation: 0,
-        surfaceTintColor: colorScheme.primaryContainer.withOpacity(0.3),
         clipBehavior: Clip.antiAlias,
         margin: const EdgeInsets.all(8),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: colorScheme.surfaceContainerHighest.withOpacity(0.3),
+        fillColor: colorScheme.surfaceVariant.withOpacity(0.3),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,

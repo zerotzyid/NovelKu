@@ -100,31 +100,6 @@ class HomeScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildNovelGrid(BuildContext context, List<NovelModel> novels) {
-    return GridView.builder(
-      padding: const EdgeInsets.all(16),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 0.75,
-        crossAxisSpacing: 12,
-        mainAxisSpacing: 12,
-      ),
-      itemCount: novels.length,
-      itemBuilder: (context, index) {
-        final novel = novels[index];
-        return _NovelCard(
-          novel: novel,
-          onTap: () => Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (_) => NovelDetailScreen(novel: novel),
-            ),
-          ),
-          onDelete: () => _deleteNovel(ref, context, novel),
-        );
-      },
-    );
-  }
-
   Future<void> _deleteNovel(WidgetRef ref, BuildContext context, NovelModel novel) async {
     final confirmed = await showDialog<bool>(
       context: context,
