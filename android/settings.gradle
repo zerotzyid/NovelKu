@@ -1,23 +1,9 @@
-include ':app'
+includeBuild("$flutterSdkPath/packages/flutter_tools/gradle")
 
-def localProperties = new Properties()
-def localPropertiesFile = file('local.properties')
-if (localPropertiesFile.exists()) {
-    localProperties.load(new FileInputStream(localPropertiesFile))
+plugins {
+    id "dev.flutter.flutter-plugin-loader" version "1.0.0" apply false
+    id "com.android.application" version "8.1.0" apply false
+    id "org.jetbrains.kotlin.android" version "1.8.20" apply false
 }
-def flutterRoot = localProperties.getProperty('flutter.sdk')
 
-include "shared_preferences_android"
-project(":shared_preferences_android").projectDir = new File("$flutterRoot/packages/shared_preferences_android/android")
-
-include "flutter_plugin_android_lifecycle"
-project(":flutter_plugin_android_lifecycle").projectDir = new File("$flutterRoot/packages/flutter_plugin_android_lifecycle")
-
-include "share_plus"
-project(":share_plus").projectDir = new File("$flutterRoot/packages/share_plus/android")
-
-include "package_info_plus"
-project(":package_info_plus").projectDir = new File("$flutterRoot/packages/package_info_plus/android")
-
-include "path_provider_android"
-project(":path_provider_android").projectDir = new File("$flutterRoot/packages/path_provider_android/android")
+include ':app'
