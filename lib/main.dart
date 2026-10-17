@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 
 import 'models/ai_config_model.dart';
 import 'models/author_profile_model.dart';
@@ -13,7 +13,7 @@ import 'ui/screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final dir = await getApplicationDocumentsDirectory();
+  final dir = Directory(Directory.current.path);
   Hive.init(dir.path);
 
   Hive.registerAdapter(NovelModelAdapter());

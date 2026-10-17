@@ -4,8 +4,6 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
-    // flutterSdkPath di-inject oleh Flutter tool sebagai -PflutterSdkPath.
-    // Fallback ke environment variable FLUTTER_ROOT (diset oleh subosito/flutter-action).
     def sdkPath = System.getenv('FLUTTER_ROOT')
     if (sdkPath == null) {
         throw new GradleException("FLUTTER_ROOT environment variable must be set. Run 'flutter build' via Flutter tool.")
