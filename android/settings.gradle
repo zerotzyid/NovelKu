@@ -19,8 +19,5 @@ project(":share_plus").projectDir = new File("$flutterRoot/packages/share_plus/s
 include "package_info_plus"
 project(":package_info_plus").projectDir = new File("$flutterRoot/packages/package_info_plus/package_info_plus/android")
 
-include "file_picker"
-project(":file_picker").projectDir = new File("$flutterRoot/packages/file_picker/file_picker/android")
-
 include "path_provider_android"
 project(":path_provider_android").projectDir = new File("$flutterRoot/packages/path_provider_android")
