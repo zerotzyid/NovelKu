@@ -69,7 +69,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
             const SizedBox(height: 16),
 
             // Advanced toggle
-            if (_provider == AIProviderType.customOpenAI || _advanced)
+            if (_provider == AIProviderType.customOpenAI)
               _buildAdvancedSection(),
 
             const SizedBox(height: 16),

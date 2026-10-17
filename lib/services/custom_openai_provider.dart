@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 
 import '../models/ai_config_model.dart';
 import 'ai_providers.dart';
+import 'openrouter_provider.dart';
 
 class CustomOpenAIProvider implements AIProvider {
   @override
