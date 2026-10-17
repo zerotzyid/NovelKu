@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AIActionButton extends StatelessWidget {
   final String label;
@@ -16,7 +17,7 @@ class AIActionButton extends StatelessWidget {
       icon: Icon(icon, size: 18, color: colorScheme.primary),
       label: Text(
         label,
-        style: TextStyle(
+        style: GoogleFonts.poppins(
           fontSize: 12,
           fontWeight: FontWeight.w500,
           color: colorScheme.primary,
@@ -55,7 +56,7 @@ class AIStreamingText extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: TextStyle(
+        style: GoogleFonts.poppins(
           color: isComplete ? Colors.green.shade800 : Colors.blue.shade800,
           fontSize: 13,
         ),
