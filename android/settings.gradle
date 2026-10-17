@@ -1,1 +1,9 @@
 include ':app'
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localProperties.load(new FileInputStream(localPropertiesFile))
+}
+def flutterRoot = localProperties.getProperty('flutter.sdk')
+apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
