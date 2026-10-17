@@ -7,7 +7,6 @@ import '../theme/app_theme.dart';
 import 'ai_settings_screen.dart';
 import 'novel_create_screen.dart';
 import 'novel_detail_screen.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -21,7 +20,7 @@ class HomeScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(
           'NovelKu',
-          style: GoogleFonts.poppins(
+          style: TextStyle(
             fontWeight: FontWeight.w700,
             letterSpacing: -0.5,
           ),
@@ -49,7 +48,7 @@ class HomeScreen extends ConsumerWidget {
                   const SizedBox(height: 24),
                   Text(
                     'Belum ada novel',
-                    style: GoogleFonts.poppins(
+                    style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
                       color: colorScheme.onSurface,
@@ -58,7 +57,7 @@ class HomeScreen extends ConsumerWidget {
                   const SizedBox(height: 8),
                   Text(
                     'Buat novel baru untuk memulai menulis cerita',
-                    style: GoogleFonts.poppins(
+                    style: TextStyle(
                       fontSize: 14,
                       color: colorScheme.onSurfaceVariant,
                     ),
@@ -130,15 +129,15 @@ class HomeScreen extends ConsumerWidget {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
-        title: Text('Hapus "${novel.title}"?', style: GoogleFonts.poppins()),
+        title: Text('Hapus "${novel.title}"?', style: TextStyle()),
         content: Text(
           'Novel ini akan dihapus bersama semua babnya.',
-          style: GoogleFonts.poppins(fontSize: 14),
+          style: TextStyle(fontSize: 14),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: Text('Batal', style: GoogleFonts.poppins()),
+            child: Text('Batal', style: TextStyle()),
           ),
           FilledButton(
             style: FilledButton.styleFrom(
@@ -193,7 +192,7 @@ class _NovelCard extends StatelessWidget {
                     child: Center(
                       child: Text(
                         novel.title.isNotEmpty ? novel.title[0].toUpperCase() : '?',
-                        style: GoogleFonts.poppins(
+                        style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w700,
                           color: colorScheme.onPrimaryContainer,
@@ -212,7 +211,7 @@ class _NovelCard extends StatelessWidget {
               const SizedBox(height: 16),
               Text(
                 novel.title,
-                style: GoogleFonts.poppins(
+                style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
                   color: colorScheme.onSurface,
@@ -224,7 +223,7 @@ class _NovelCard extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(
                   'Genre: ${novel.genre}',
-                  style: GoogleFonts.poppins(
+                  style: TextStyle(
                     fontSize: 12,
                     color: colorScheme.onSurfaceVariant,
                   ),
@@ -234,7 +233,7 @@ class _NovelCard extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   'Tema: ${novel.theme}',
-                  style: GoogleFonts.poppins(
+                  style: TextStyle(
                     fontSize: 12,
                     color: colorScheme.onSurfaceVariant,
                   ),
@@ -245,7 +244,7 @@ class _NovelCard extends StatelessWidget {
                 children: [
                   Text(
                     '${novel.updatedAt.day}/${novel.updatedAt.month}/${novel.updatedAt.year}',
-                    style: GoogleFonts.poppins(
+                    style: TextStyle(
                       fontSize: 11,
                       color: colorScheme.onSurfaceVariant,
                     ),

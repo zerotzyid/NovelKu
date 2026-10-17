@@ -5,7 +5,6 @@ import '../models/novel_model.dart';
 import '../providers/app_providers.dart';
 import '../theme/app_theme.dart';
 import 'home_screen.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class NovelCreateScreen extends ConsumerStatefulWidget {
   const NovelCreateScreen({super.key});
@@ -69,7 +68,7 @@ class _NovelCreateScreenState extends ConsumerState<NovelCreateScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Buat Novel Baru', style: GoogleFonts.poppins(fontWeight: FontWeight.w600)),
+        title: Text('Buat Novel Baru', style: TextStyle(fontWeight: FontWeight.w600)),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
@@ -82,7 +81,7 @@ class _NovelCreateScreenState extends ConsumerState<NovelCreateScreen> {
           children: [
             Text(
               'Informasi Novel',
-              style: GoogleFonts.poppins(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
                 color: colorScheme.onSurface,
@@ -107,7 +106,7 @@ class _NovelCreateScreenState extends ConsumerState<NovelCreateScreen> {
             const SizedBox(height: 24),
             Text(
               'Genre & Tema',
-              style: GoogleFonts.poppins(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
                 color: colorScheme.onSurface,
@@ -128,7 +127,7 @@ class _NovelCreateScreenState extends ConsumerState<NovelCreateScreen> {
             const SizedBox(height: 24),
             Text(
               'Latar Belakang Cerita',
-              style: GoogleFonts.poppins(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
                 color: colorScheme.onSurface,
@@ -157,7 +156,7 @@ class _NovelCreateScreenState extends ConsumerState<NovelCreateScreen> {
                 onPressed: _createNovel,
                 child: Text(
                   'Buat Novel',
-                  style: GoogleFonts.poppins(
+                  style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
                   ),
@@ -193,7 +192,7 @@ class _NovelCreateScreenState extends ConsumerState<NovelCreateScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Genre', style: GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w500)),
+        Text('Genre', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
         const SizedBox(height: 8),
         Wrap(
           spacing: 8,
@@ -201,7 +200,7 @@ class _NovelCreateScreenState extends ConsumerState<NovelCreateScreen> {
           children: _genres.map((g) {
             final selected = _selectedGenre == g;
             return FilterChip(
-              label: Text(g, style: GoogleFonts.poppins(fontSize: 12)),
+              label: Text(g, style: TextStyle(fontSize: 12)),
               selected: selected,
               onSelected: (v) => setState(() => _selectedGenre = g),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -225,7 +224,7 @@ class _NovelCreateScreenState extends ConsumerState<NovelCreateScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Tema', style: GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w500)),
+        Text('Tema', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
         const SizedBox(height: 8),
         Wrap(
           spacing: 8,
@@ -233,7 +232,7 @@ class _NovelCreateScreenState extends ConsumerState<NovelCreateScreen> {
           children: _themes.map((t) {
             final selected = _selectedTheme == t;
             return FilterChip(
-              label: Text(t, style: GoogleFonts.poppins(fontSize: 12)),
+              label: Text(t, style: TextStyle(fontSize: 12)),
               selected: selected,
               onSelected: (v) => setState(() => _selectedTheme = t),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -248,7 +247,7 @@ class _NovelCreateScreenState extends ConsumerState<NovelCreateScreen> {
     if (_titleController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Judul novel wajib diisi', style: GoogleFonts.poppins()),
+          content: Text('Judul novel wajib diisi', style: TextStyle()),
           backgroundColor: Theme.of(context).colorScheme.error,
         ),
       );

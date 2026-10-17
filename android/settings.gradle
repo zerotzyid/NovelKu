@@ -1,14 +1,1 @@
 include ':app'
-
-def localProperties = new Properties()
-def localPropertiesFile = file('local.properties')
-if (localPropertiesFile.exists()) {
-    localProperties.load(new FileInputStream(localPropertiesFile))
-}
-def flutterRoot = localProperties.getProperty('flutter.sdk')
-
-include "flutter_plugin_android_lifecycle"
-project(":flutter_plugin_android_lifecycle").projectDir = new File("$flutterRoot/packages/flutter_plugin_android_lifecycle")
-
-include "path_provider_android"
-project(":path_provider_android").projectDir = new File("$flutterRoot/packages/path_provider/path_provider_android")

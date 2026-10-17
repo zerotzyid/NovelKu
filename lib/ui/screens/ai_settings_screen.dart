@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/ai_config_model.dart';
 import '../providers/app_providers.dart';
 import '../theme/app_theme.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AISettingsScreen extends ConsumerStatefulWidget {
   const AISettingsScreen({super.key});
@@ -61,7 +60,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pengaturan AI', style: GoogleFonts.poppins(fontWeight: FontWeight.w600)),
+        title: Text('Pengaturan AI', style: TextStyle(fontWeight: FontWeight.w600)),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
@@ -74,7 +73,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
           children: [
             Text(
               'Konfigurasi AI',
-              style: GoogleFonts.poppins(
+              style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
                 color: colorScheme.onSurface,
@@ -83,7 +82,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
             const SizedBox(height: 8),
             Text(
               'Pilih penyedia AI untuk menghasilkan bab novel',
-              style: GoogleFonts.poppins(
+              style: TextStyle(
                 fontSize: 14,
                 color: colorScheme.onSurfaceVariant,
               ),
@@ -195,7 +194,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
               Wrap(
                 spacing: 8,
                 children: _models.take(6).map((m) => ChoiceChip(
-                  label: Text(m, style: GoogleFonts.poppins(fontSize: 11)),
+                  label: Text(m, style: TextStyle(fontSize: 11)),
                   selected: _modelController.text == m,
                   onSelected: (v) => setState(() => _modelController.text = m),
                 )).toList(),
@@ -210,7 +209,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
                 children: [
                   Text(
                     'Pengaturan Lanjutan',
-                    style: GoogleFonts.poppins(
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                       color: colorScheme.onSurface,
@@ -248,7 +247,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
               const SizedBox(height: 8),
               Text(
                 _testResult!,
-                style: GoogleFonts.poppins(
+                style: TextStyle(
                   fontSize: 12,
                   color: _testResult!.toLowerCase().contains('berhasil') ||
                           _testResult!.toLowerCase().contains('sukses')
@@ -267,7 +266,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
                 onPressed: _isTesting ? null : () => _save(config, notifier),
                 child: Text(
                   'Simpan Konfigurasi & Mulai Menulis',
-                  style: GoogleFonts.poppins(
+                  style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
                   ),
@@ -283,7 +282,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
   Widget _buildSectionTitle(String title) {
     return Text(
       title,
-      style: GoogleFonts.poppins(
+      style: TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w700,
         color: Theme.of(context).colorScheme.onSurface,
@@ -313,7 +312,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
               const SizedBox(width: 6),
               Text(
                 label,
-                style: GoogleFonts.poppins(
+                style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                   color: selected ? colorScheme.onPrimary : colorScheme.onSurface,
@@ -325,7 +324,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
             const SizedBox(height: 4),
             Text(
               subtitle,
-              style: GoogleFonts.poppins(
+              style: TextStyle(
                 fontSize: 11,
                 color: selected ? colorScheme.onPrimary.withOpacity(0.8) : colorScheme.onSurfaceVariant,
               ),
@@ -337,7 +336,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
       onSelected: (v) => setState(() => _provider = type),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       selectedColor: colorScheme.primary,
-      labelStyle: GoogleFonts.poppins(fontSize: 12),
+      labelStyle: TextStyle(fontSize: 12),
     );
   }
 
@@ -347,7 +346,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
       children: [
         Text(
           'Mode Lanjutan',
-          style: GoogleFonts.poppins(
+          style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
             color: colorScheme.onSurface,
@@ -411,7 +410,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
     if (_apiKeyController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('API key wajib diisi terlebih dahulu', style: GoogleFonts.poppins()),
+          content: Text('API key wajib diisi terlebih dahulu', style: TextStyle()),
           backgroundColor: Theme.of(context).colorScheme.error,
         ),
       );
@@ -447,7 +446,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
     if (_apiKeyController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('API key wajib diisi', style: GoogleFonts.poppins()),
+          content: Text('API key wajib diisi', style: TextStyle()),
           backgroundColor: Theme.of(context).colorScheme.error,
         ),
       );
@@ -456,7 +455,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
     if (_modelController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Model wajib diisi', style: GoogleFonts.poppins()),
+          content: Text('Model wajib diisi', style: TextStyle()),
           backgroundColor: Theme.of(context).colorScheme.error,
         ),
       );
@@ -468,25 +467,24 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
         : _baseUrlController.text.trim();
 
     AIConfigModel config;
-    switch (_provider) {
-      case AIProviderType.openRouter:
-        config = AIConfigModel.createOpenRouter(
-          apiKey: _apiKeyController.text.trim(),
-          modelId: _modelController.text.trim(),
-          modelName: _modelController.text.trim(),
-        );
-      case AIProviderType.nvidiaNim:
-        config = AIConfigModel.createNvidiaNim(
-          apiKey: _apiKeyController.text.trim(),
-          modelId: _modelController.text.trim(),
-          modelName: _modelController.text.trim(),
-        );
-      case AIProviderType.customOpenAI:
-        config = AIConfigModel.createCustom(
-          baseUrl: baseUrl,
-          apiKey: _apiKeyController.text.trim(),
-          modelId: _modelController.text.trim(),
-        );
+    if (_provider == AIProviderType.openRouter) {
+      config = AIConfigModel.createOpenRouter(
+        apiKey: _apiKeyController.text.trim(),
+        modelId: _modelController.text.trim(),
+        modelName: _modelController.text.trim(),
+      );
+    } else if (_provider == AIProviderType.nvidiaNim) {
+      config = AIConfigModel.createNvidiaNim(
+        apiKey: _apiKeyController.text.trim(),
+        modelId: _modelController.text.trim(),
+        modelName: _modelController.text.trim(),
+      );
+    } else {
+      config = AIConfigModel.createCustom(
+        baseUrl: baseUrl,
+        apiKey: _apiKeyController.text.trim(),
+        modelId: _modelController.text.trim(),
+      );
     }
 
     if (_advanced) {
@@ -504,7 +502,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Konfigurasi AI disimpan', style: GoogleFonts.poppins()),
+          content: Text('Konfigurasi AI disimpan', style: TextStyle()),
           backgroundColor: Colors.green.shade700,
         ),
       );

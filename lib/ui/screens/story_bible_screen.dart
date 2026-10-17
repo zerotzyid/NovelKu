@@ -6,7 +6,6 @@ import '../../models/author_profile_model.dart';
 import '../../providers/app_providers.dart';
 import '../theme/app_theme.dart';
 import 'author_profile_screen.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class StoryBibleScreen extends ConsumerStatefulWidget {
   final String novelId;
@@ -46,7 +45,7 @@ class _StoryBibleScreenState extends ConsumerState<StoryBibleScreen>
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Story Bible', style: GoogleFonts.poppins(fontWeight: FontWeight.w600)),
+        title: Text('Story Bible', style: TextStyle(fontWeight: FontWeight.w600)),
         bottom: TabBar(
           controller: _tabController,
           indicatorColor: colorScheme.primary,
@@ -114,9 +113,9 @@ class _StoryBibleScreenState extends ConsumerState<StoryBibleScreen>
         children: [
           Icon(Icons.people_outlined, size: 64, color: Colors.grey),
           SizedBox(height: 16),
-          Text('Belum ada karakter', style: GoogleFonts.poppins(fontSize: 16, color: Colors.grey)),
+          Text('Belum ada karakter', style: TextStyle(fontSize: 16, color: Colors.grey)),
           SizedBox(height: 8),
-          Text('Tambah karakter untuk melengkapi Story Bible', style: GoogleFonts.poppins(fontSize: 12, color: Colors.grey)),
+          Text('Tambah karakter untuk melengkapi Story Bible', style: TextStyle(fontSize: 12, color: Colors.grey)),
         ],
       ),
     );
@@ -164,7 +163,7 @@ class _StoryBibleScreenState extends ConsumerState<StoryBibleScreen>
       children: [
         Text(
           title,
-          style: GoogleFonts.poppins(
+          style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
             color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -194,7 +193,7 @@ class _StoryBibleScreenState extends ConsumerState<StoryBibleScreen>
       children: [
         Text(
           label,
-          style: GoogleFonts.poppins(
+          style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
             color: Theme.of(context).colorScheme.onSurfaceVariant,

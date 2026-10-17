@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   static const Color _seedColor = Color(0xFF6D4C41);
@@ -14,33 +13,33 @@ class AppTheme {
       useMaterial3: true,
       colorScheme: colorScheme,
       textTheme: const TextTheme(
-        displayLarge: GoogleFonts.poppins(
+        displayLarge: TextStyle(
           fontSize: 32,
           fontWeight: FontWeight.w300,
           letterSpacing: -0.25,
         ),
-        displayMedium: GoogleFonts.poppins(
+        displayMedium: TextStyle(
           fontSize: 28,
           fontWeight: FontWeight.w300,
           letterSpacing: -0.25,
         ),
-        titleLarge: GoogleFonts.poppins(
+        titleLarge: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w600,
         ),
-        titleMedium: GoogleFonts.poppins(
+        titleMedium: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w500,
         ),
-        bodyLarge: GoogleFonts.poppins(
+        bodyLarge: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w400,
         ),
-        bodyMedium: GoogleFonts.poppins(
+        bodyMedium: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w400,
         ),
-        labelLarge: GoogleFonts.poppins(
+        labelLarge: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w500,
         ),

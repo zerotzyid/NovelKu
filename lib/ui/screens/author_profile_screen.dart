@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/author_profile_model.dart';
 import '../../providers/app_providers.dart';
 import '../theme/app_theme.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AuthorProfileScreen extends ConsumerStatefulWidget {
   final String? novelId;
@@ -92,7 +91,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Kepribadian Penulisan AI', style: GoogleFonts.poppins(fontWeight: FontWeight.w600)),
+        title: Text('Kepribadian Penulisan AI', style: TextStyle(fontWeight: FontWeight.w600)),
         actions: [
           IconButton(
             icon: const Icon(Icons.save_outlined),
@@ -108,7 +107,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
           children: [
             Text(
               'Profil Penulisan',
-              style: GoogleFonts.poppins(
+              style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
                 color: colorScheme.onSurface,
@@ -117,7 +116,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
             const SizedBox(height: 8),
             Text(
               'Atur gaya penulisan yang menjadi pedoman AI',
-              style: GoogleFonts.poppins(
+              style: TextStyle(
                 fontSize: 14,
                 color: colorScheme.onSurfaceVariant,
               ),
@@ -139,7 +138,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
             const SizedBox(height: 12),
             Text(
               'Pilih satu atau lebih gaya yang Anda sukai',
-              style: GoogleFonts.poppins(
+              style: TextStyle(
                 fontSize: 12,
                 color: colorScheme.onSurfaceVariant,
               ),
@@ -151,7 +150,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
               children: WritingStyle.values.map((s) {
                 final selected = _styles.contains(s);
                 return FilterChip(
-                  label: Text(_styleLabel(s), style: GoogleFonts.poppins(fontSize: 12)),
+                  label: Text(_styleLabel(s), style: TextStyle(fontSize: 12)),
                   selected: selected,
                   onSelected: (v) => setState(() {
                     if (v) _styles.add(s); else _styles.remove(s);
@@ -176,7 +175,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
             const SizedBox(height: 12),
             Text(
               'Contoh: Tulis dengan bahasa Indonesia yang natural, dialog tidak kaku, deskripsi secukupnya',
-              style: GoogleFonts.poppins(
+              style: TextStyle(
                 fontSize: 12,
                 color: colorScheme.onSurfaceVariant,
               ),
@@ -201,7 +200,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
                 value: _pov,
                 items: POV.values.map((p) => DropdownMenuItem(
                   value: p,
-                  child: Text(_povLabel(p), style: GoogleFonts.poppins(fontSize: 14)),
+                  child: Text(_povLabel(p), style: TextStyle(fontSize: 14)),
                 )).toList(),
                 onChanged: (v) => setState(() => _pov = v!),
                 decoration: const InputDecoration(
@@ -215,7 +214,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
                 value: _tense,
                 items: Tense.values.map((t) => DropdownMenuItem(
                   value: t,
-                  child: Text(_tenseLabel(t), style: GoogleFonts.poppins(fontSize: 14)),
+                  child: Text(_tenseLabel(t), style: TextStyle(fontSize: 14)),
                 )).toList(),
                 onChanged: (v) => setState(() => _tense = v!),
                 decoration: const InputDecoration(
@@ -251,7 +250,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
   Widget _buildSectionTitle(String title) {
     return Text(
       title,
-      style: GoogleFonts.poppins(
+      style: TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w700,
         color: Theme.of(context).colorScheme.onSurface,
@@ -266,7 +265,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 14)),
+            Text(title, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
             const SizedBox(height: 8),
             child,
           ],
@@ -285,8 +284,8 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(title, style: GoogleFonts.poppins(fontWeight: FontWeight.w500, fontSize: 14)),
-                Text('$value/5', style: GoogleFonts.poppins(fontSize: 12, color: Colors.grey)),
+                Text(title, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14)),
+                Text('$value/5', style: TextStyle(fontSize: 12, color: Colors.grey)),
               ],
             ),
             const SizedBox(height: 8),
@@ -340,7 +339,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
       children: [
         Text(
           label + (required ? ' *' : ''),
-          style: GoogleFonts.poppins(
+          style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
             color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -364,7 +363,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
     if (_nameController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Nama profil wajib diisi', style: GoogleFonts.poppins()),
+          content: Text('Nama profil wajib diisi', style: TextStyle()),
           backgroundColor: Theme.of(context).colorScheme.error,
         ),
       );
@@ -402,7 +401,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Profil penulis disimpan', style: GoogleFonts.poppins()),
+          content: Text('Profil penulis disimpan', style: TextStyle()),
           backgroundColor: Colors.green.shade700,
         ),
       );

@@ -7,7 +7,6 @@ import '../../providers/app_providers.dart';
 import '../theme/app_theme.dart';
 import 'ai_settings_screen.dart';
 import 'chapter_editor_screen.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class NovelDetailScreen extends ConsumerWidget {
   final NovelModel novel;
@@ -22,7 +21,7 @@ class NovelDetailScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(
           novel.title,
-          style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+          style: TextStyle(fontWeight: FontWeight.w600),
         ),
         actions: [
           IconButton(
@@ -48,7 +47,7 @@ class NovelDetailScreen extends ConsumerWidget {
                   const SizedBox(height: 24),
                   Text(
                     'Belum ada bab',
-                    style: GoogleFonts.poppins(
+                    style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
                       color: colorScheme.onSurface,
@@ -57,7 +56,7 @@ class NovelDetailScreen extends ConsumerWidget {
                   const SizedBox(height: 8),
                   Text(
                     'Buat bab pertama untuk memulai menulis',
-                    style: GoogleFonts.poppins(
+                    style: TextStyle(
                       fontSize: 14,
                       color: colorScheme.onSurfaceVariant,
                     ),
@@ -104,7 +103,7 @@ class NovelDetailScreen extends ConsumerWidget {
           backgroundColor: colorScheme.primaryContainer,
           child: Text(
             '${chapter.number}',
-            style: GoogleFonts.poppins(
+            style: TextStyle(
               fontWeight: FontWeight.w700,
               color: colorScheme.onPrimaryContainer,
             ),
@@ -112,11 +111,11 @@ class NovelDetailScreen extends ConsumerWidget {
         ),
         title: Text(
           chapter.title,
-          style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+          style: TextStyle(fontWeight: FontWeight.w600),
         ),
         subtitle: Text(
           '${chapter.content.length} kata · ${_statusLabel(chapter.status)}',
-          style: GoogleFonts.poppins(fontSize: 12, color: colorScheme.onSurfaceVariant),
+          style: TextStyle(fontSize: 12, color: colorScheme.onSurfaceVariant),
         ),
         trailing: IconButton(
           icon: Icon(Icons.delete_outline, color: colorScheme.error),
@@ -143,7 +142,7 @@ class NovelDetailScreen extends ConsumerWidget {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: Text('Buat Bab Baru', style: GoogleFonts.poppins()),
+        title: Text('Buat Bab Baru', style: TextStyle()),
         content: TextField(
           controller: controller,
           decoration: InputDecoration(
@@ -155,7 +154,7 @@ class NovelDetailScreen extends ConsumerWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Batal', style: GoogleFonts.poppins()),
+            child: Text('Batal', style: TextStyle()),
           ),
           FilledButton(
             onPressed: () {
@@ -179,12 +178,12 @@ class NovelDetailScreen extends ConsumerWidget {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
-        title: Text('Hapus Bab?', style: GoogleFonts.poppins()),
-        content: Text('Bab "${chapter.title}" akan dihapus.', style: GoogleFonts.poppins(fontSize: 14)),
+        title: Text('Hapus Bab?', style: TextStyle()),
+        content: Text('Bab "${chapter.title}" akan dihapus.', style: TextStyle(fontSize: 14)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: Text('Batal', style: GoogleFonts.poppins()),
+            child: Text('Batal', style: TextStyle()),
           ),
           FilledButton(
             style: FilledButton.styleFrom(
@@ -207,7 +206,7 @@ class NovelDetailScreen extends ConsumerWidget {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: Text('Edit Judul Novel', style: GoogleFonts.poppins()),
+        title: Text('Edit Judul Novel', style: TextStyle()),
         content: TextField(
           controller: controller,
           autofocus: true,
@@ -216,7 +215,7 @@ class NovelDetailScreen extends ConsumerWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Batal', style: GoogleFonts.poppins()),
+            child: Text('Batal', style: TextStyle()),
           ),
           FilledButton(
             onPressed: () {

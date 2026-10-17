@@ -6,7 +6,6 @@ import '../../providers/app_providers.dart';
 import '../../services/ai_providers.dart';
 import '../theme/app_theme.dart';
 import '../widgets/ai_action_button.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ChapterEditorScreen extends ConsumerStatefulWidget {
   final String novelId;
@@ -45,7 +44,7 @@ class _ChapterEditorScreenState extends ConsumerState<ChapterEditorScreen> {
       appBar: AppBar(
         title: Text(
           'Bab ${widget.chapter.number}: ${widget.chapter.title}',
-          style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+          style: TextStyle(fontWeight: FontWeight.w600),
         ),
         actions: [
           IconButton(
@@ -65,7 +64,7 @@ class _ChapterEditorScreenState extends ConsumerState<ChapterEditorScreen> {
                   children: [
                     const Icon(Icons.save_outlined, size: 18),
                     const SizedBox(width: 8),
-                    Text('Simpan', style: GoogleFonts.poppins()),
+                    Text('Simpan', style: TextStyle()),
                   ],
                 ),
               ),
@@ -75,7 +74,7 @@ class _ChapterEditorScreenState extends ConsumerState<ChapterEditorScreen> {
                   children: [
                     const Icon(Icons.history_outlined, size: 18),
                     const SizedBox(width: 8),
-                    Text('Riwayat Revisi', style: GoogleFonts.poppins()),
+                    Text('Riwayat Revisi', style: TextStyle()),
                   ],
                 ),
               ),
@@ -98,7 +97,7 @@ class _ChapterEditorScreenState extends ConsumerState<ChapterEditorScreen> {
                 decoration: InputDecoration(
                   hintText: 'Mulai menulis bab di sini...',
                   border: InputBorder.none,
-                  hintStyle: GoogleFonts.poppins(color: colorScheme.onSurfaceVariant),
+                  hintStyle: TextStyle(color: colorScheme.onSurfaceVariant),
                 ),
                 onChanged: (_) => setState(() {}),
               ),
@@ -115,7 +114,7 @@ class _ChapterEditorScreenState extends ConsumerState<ChapterEditorScreen> {
                   children: [
                     Text(
                       '${_contentController.text.split(' ').length} kata',
-                      style: GoogleFonts.poppins(
+                      style: TextStyle(
                         fontSize: 12,
                         color: colorScheme.onSurfaceVariant,
                       ),
@@ -170,7 +169,7 @@ class _ChapterEditorScreenState extends ConsumerState<ChapterEditorScreen> {
                         Expanded(
                           child: Text(
                             'Hasil AI siap diterapkan',
-                            style: GoogleFonts.poppins(
+                            style: TextStyle(
                               fontSize: 12,
                               color: Colors.green.shade700,
                             ),
@@ -200,7 +199,7 @@ class _ChapterEditorScreenState extends ConsumerState<ChapterEditorScreen> {
     );
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Disimpan', style: GoogleFonts.poppins()),
+        content: Text('Disimpan', style: TextStyle()),
         backgroundColor: Colors.green.shade700,
         duration: const Duration(seconds: 2),
       ),
@@ -217,7 +216,7 @@ class _ChapterEditorScreenState extends ConsumerState<ChapterEditorScreen> {
           children: [
             Text(
               'Tulis dengan AI',
-              style: GoogleFonts.poppins(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
               ),
@@ -280,8 +279,8 @@ class _ChapterEditorScreenState extends ConsumerState<ChapterEditorScreen> {
   }) {
     return ListTile(
       leading: Icon(icon, color: Theme.of(context).colorScheme.primary),
-      title: Text(title, style: GoogleFonts.poppins(fontWeight: FontWeight.w500)),
-      subtitle: Text(subtitle, style: GoogleFonts.poppins(fontSize: 12)),
+      title: Text(title, style: TextStyle(fontWeight: FontWeight.w500)),
+      subtitle: Text(subtitle, style: TextStyle(fontSize: 12)),
       onTap: () {
         Navigator.pop(context);
       },
@@ -302,7 +301,7 @@ class _ChapterEditorScreenState extends ConsumerState<ChapterEditorScreen> {
   void _copyText(String text) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Disalin ke clipboard', style: GoogleFonts.poppins()),
+        content: Text('Disalin ke clipboard', style: TextStyle()),
         backgroundColor: Theme.of(context).colorScheme.primary,
         duration: const Duration(seconds: 2),
       ),
@@ -313,15 +312,15 @@ class _ChapterEditorScreenState extends ConsumerState<ChapterEditorScreen> {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: Text('Riwayat Revisi', style: GoogleFonts.poppins()),
+        title: Text('Riwayat Revisi', style: TextStyle()),
         content: Text(
           'Fitur riwayat revisi akan ditampilkan di sini.',
-          style: GoogleFonts.poppins(fontSize: 14),
+          style: TextStyle(fontSize: 14),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Tutup', style: GoogleFonts.poppins()),
+            child: Text('Tutup', style: TextStyle()),
           ),
         ],
       ),
