@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/chapter_model.dart';
 import '../../providers/app_providers.dart';
 import '../../services/ai_providers.dart';
-import '../theme/app_theme.dart';
+import '../../theme/app_theme.dart';
 import '../widgets/ai_action_button.dart';
 
 class ChapterEditorScreen extends ConsumerStatefulWidget {

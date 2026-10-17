@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/chapter_model.dart';
 import '../../models/novel_model.dart';
 import '../../providers/app_providers.dart';
-import '../theme/app_theme.dart';
+import '../../theme/app_theme.dart';
 import 'ai_settings_screen.dart';
 import 'chapter_editor_screen.dart';
 

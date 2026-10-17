@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../models/novel_model.dart';
-import '../providers/app_providers.dart';
-import '../theme/app_theme.dart';
+import '../../models/novel_model.dart';
+import '../../providers/app_providers.dart';
+import '../../theme/app_theme.dart';
 import 'home_screen.dart';
 
 class NovelCreateScreen extends ConsumerStatefulWidget {

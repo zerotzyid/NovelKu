@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../models/author_profile_model.dart';
 import '../../providers/app_providers.dart';
-import '../theme/app_theme.dart';
+import '../../theme/app_theme.dart';
 
 class AuthorProfileScreen extends ConsumerStatefulWidget {
   final String? novelId;
