@@ -185,8 +185,8 @@ class NovelDetailScreen extends ConsumerWidget {
             onPressed: () => Navigator.pop(context, false),
             child: Text('Batal', style: TextStyle()),
           ),
-          FilledButton.tonal(
-            style: FilledButton.tonal.styleFrom(
+          FilledButton(
+            style: FilledButton.styleFrom(
               backgroundColor: Colors.red.shade50,
               foregroundColor: Colors.red,
             ),

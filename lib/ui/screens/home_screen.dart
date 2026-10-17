@@ -139,8 +139,8 @@ class HomeScreen extends ConsumerWidget {
             onPressed: () => Navigator.pop(context, false),
             child: Text('Batal', style: TextStyle()),
           ),
-          FilledButton.tonal(
-            style: FilledButton.tonal.styleFrom(
+          FilledButton(
+            style: FilledButton.styleFrom(
               backgroundColor: Theme.of(context).colorScheme.errorContainer,
               foregroundColor: Theme.of(context).colorScheme.onErrorContainer,
             ),
