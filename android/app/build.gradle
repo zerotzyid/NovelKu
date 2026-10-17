@@ -25,6 +25,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.novelku"
+        namespace "com.example.novelku"
         minSdkVersion 21
         targetSdkVersion 33
         versionCode flutterVersionCode?.toInteger() ?: 1
