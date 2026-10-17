@@ -19,3 +19,18 @@ plugins {
 
 rootProject.name = "NovelKu"
 include ":app"
+
+// Include Flutter plugin Android projects if dependencies require them
+def sdkPath = System.getenv('FLUTTER_ROOT')
+if (sdkPath != null) {
+    def pluginsDir = "$sdkPath/packages"
+    def androidPlugins = [
+        "path_provider_android": "$pluginsDir/path_provider_android",
+    ]
+    androidPlugins.each { name, dir ->
+        if (new File(dir).exists()) {
+            include name
+            project(":$name").projectDir = new File(dir)
+        }
+    }
+}
