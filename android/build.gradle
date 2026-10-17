@@ -22,6 +22,9 @@ subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
     if (project.name != 'app') {
         apply plugin: 'com.android.library'
+        android {
+            compileSdk 33
+        }
     }
 }
 subprojects {
