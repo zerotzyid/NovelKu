@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../models/chapter_model.dart';
 import '../../models/novel_model.dart';
 import '../../providers/app_providers.dart';
-import 'chapter_editor_screen.dart';
+import '../theme/app_theme.dart';
 import 'ai_settings_screen.dart';
+import 'chapter_editor_screen.dart';
 
 class NovelDetailScreen extends ConsumerWidget {
   final NovelModel novel;
@@ -14,53 +16,74 @@ class NovelDetailScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final chapters = ref.watch(chapterNotifierProvider(novel.id));
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(novel.title),
+        title: Text(
+          novel.title,
+          style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+        ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.auto_awesome),
+            icon: const Icon(Icons.auto_awesome_outlined),
+            tooltip: 'Pengaturan AI',
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute(builder: (_) => const AISettingsScreen()),
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.edit),
+            icon: const Icon(Icons.edit_outlined),
+            tooltip: 'Edit Novel',
             onPressed: () => _editNovel(context, ref),
           ),
         ],
       ),
       body: chapters.isEmpty
-          ? const Center(
+          ? Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.edit_note, size: 80, color: Colors.grey),
-                  SizedBox(height: 16),
-                  Text('Belum ada bab', style: TextStyle(fontSize: 18, color: Colors.grey)),
-                  SizedBox(height: 8),
-                  Text('Buat bab pertama untuk memulai', style: TextStyle(color: Colors.grey)),
+                  Icon(Icons.edit_note_outlined, size: 80, color: colorScheme.onSurfaceVariant),
+                  const SizedBox(height: 24),
+                  Text(
+                    'Belum ada bab',
+                    style: GoogleFonts.poppins(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: colorScheme.onSurface,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Buat bab pertama untuk memulai menulis',
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      color: colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                  const SizedBox(height: 32),
+                  FilledButton.icon(
+                    icon: const Icon(Icons.add_circle_outline),
+                    label: const Text('Buat Bab Baru'),
+                    onPressed: () => _createChapter(context, ref),
+                  ),
                 ],
               ),
             )
           : ListView.builder(
+              padding: const EdgeInsets.all(16),
               itemCount: chapters.length,
               itemBuilder: (context, index) {
                 final chapter = chapters[index];
-                return ListTile(
-                  leading: CircleAvatar(child: Text('${chapter.number}')),
-                  title: Text(chapter.title, style: const TextStyle(fontWeight: FontWeight.bold)),
-                  subtitle: Text('${chapter.content.length} kata · ${_statusLabel(chapter.status)}'),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.delete, color: Colors.red),
-                    onPressed: () => _deleteChapter(ref, context, chapter),
-                  ),
+                return _ChapterCard(
+                  chapter: chapter,
                   onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (_) => ChapterEditorScreen(novelId: novel.id, chapter: chapter),
                     ),
                   ),
+                  onDelete: () => _deleteChapter(ref, context, chapter),
                 );
               },
             ),
@@ -68,6 +91,38 @@ class NovelDetailScreen extends ConsumerWidget {
         icon: const Icon(Icons.add),
         label: const Text('Bab Baru'),
         onPressed: () => _createChapter(context, ref),
+      ),
+    );
+  }
+
+  Widget _buildChapterCard(BuildContext context, ChapterModel chapter) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Card(
+      child: ListTile(
+        leading: CircleAvatar(
+          backgroundColor: colorScheme.primaryContainer,
+          child: Text(
+            '${chapter.number}',
+            style: GoogleFonts.poppins(
+              fontWeight: FontWeight.w700,
+              color: colorScheme.onPrimaryContainer,
+            ),
+          ),
+        ),
+        title: Text(
+          chapter.title,
+          style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+        ),
+        subtitle: Text(
+          '${chapter.content.length} kata · ${_statusLabel(chapter.status)}',
+          style: GoogleFonts.poppins(fontSize: 12, color: colorScheme.onSurfaceVariant),
+        ),
+        trailing: IconButton(
+          icon: Icon(Icons.delete_outline, color: colorScheme.error),
+          onPressed: () => _deleteChapter(ref, context, chapter),
+          tooltip: 'Hapus Bab',
+        ),
       ),
     );
   }
@@ -88,15 +143,21 @@ class NovelDetailScreen extends ConsumerWidget {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('Buat Bab Baru'),
+        title: Text('Buat Bab Baru', style: GoogleFonts.poppins()),
         content: TextField(
           controller: controller,
-          decoration: const InputDecoration(hintText: 'Judul bab'),
+          decoration: InputDecoration(
+            hintText: 'Judul bab',
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+          ),
           autofocus: true,
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Batal')),
-          ElevatedButton(
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('Batal', style: GoogleFonts.poppins()),
+          ),
+          FilledButton(
             onPressed: () {
               if (controller.text.trim().isEmpty) return;
               final chapter = ChapterModel.create(
@@ -118,12 +179,18 @@ class NovelDetailScreen extends ConsumerWidget {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('Hapus Bab?'),
-        content: Text('Bab "${chapter.title}" akan dihapus.'),
+        title: Text('Hapus Bab?', style: GoogleFonts.poppins()),
+        content: Text('Bab "${chapter.title}" akan dihapus.', style: GoogleFonts.poppins(fontSize: 14)),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Batal')),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: Text('Batal', style: GoogleFonts.poppins()),
+          ),
+          FilledButton.tonal(
+            style: FilledButton.tonal.styleFrom(
+              backgroundColor: Colors.red.shade50,
+              foregroundColor: Colors.red,
+            ),
             onPressed: () => Navigator.pop(context, true),
             child: const Text('Hapus'),
           ),
@@ -140,11 +207,18 @@ class NovelDetailScreen extends ConsumerWidget {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('Edit Judul Novel'),
-        content: TextField(controller: controller, autofocus: true),
+        title: Text('Edit Judul Novel', style: GoogleFonts.poppins()),
+        content: TextField(
+          controller: controller,
+          autofocus: true,
+          decoration: InputDecoration(border: OutlineInputBorder(borderRadius: BorderRadius.circular(12))),
+        ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Batal')),
-          ElevatedButton(
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('Batal', style: GoogleFonts.poppins()),
+          ),
+          FilledButton(
             onPressed: () {
               if (controller.text.trim().isEmpty) return;
               ref.read(novelNotifierProvider.notifier).update(

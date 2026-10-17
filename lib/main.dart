@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
-import 'dart:io';
 
 import 'models/ai_config_model.dart';
 import 'models/author_profile_model.dart';
@@ -9,12 +8,12 @@ import 'models/chapter_model.dart';
 import 'models/generation_history_model.dart';
 import 'models/novel_model.dart';
 import 'models/story_bible_model.dart';
+import 'theme/app_theme.dart';
 import 'ui/screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final dir = Directory(Directory.current.path);
-  Hive.init(dir.path);
+  Hive.init('.');
 
   Hive.registerAdapter(NovelModelAdapter());
   Hive.registerAdapter(ChapterModelAdapter());
@@ -43,12 +42,11 @@ class NovelkuApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Novelku',
+      title: 'NovelKu',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF6D4C41)),
-      ),
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.system,
       home: const HomeScreen(),
     );
   }

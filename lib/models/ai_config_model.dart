@@ -3,7 +3,7 @@ import 'package:uuid/uuid.dart';
 
 final _uuid = const Uuid();
 
-enum AIProviderType { openRouter, customOpenAI }
+enum AIProviderType { openRouter, nvidiaNim, customOpenAI }
 
 enum AISetupMode { simple, advanced }
 
@@ -69,6 +69,28 @@ class AIConfigModel extends Equatable {
     );
   }
 
+  factory AIConfigModel.createNvidiaNim({
+    required String apiKey,
+    required String modelId,
+    String? modelName,
+  }) {
+    final now = DateTime.now();
+    return AIConfigModel(
+      id: _uuid.v4(),
+      providerType: AIProviderType.nvidiaNim,
+      apiKey: apiKey,
+      baseUrl: 'https://integrate.api.nvidia.com/v1/chat/completions',
+      modelId: modelId,
+      modelName: modelName,
+      customHeaders: {
+        'Authorization': 'Bearer $apiKey',
+      },
+      setupMode: AISetupMode.simple,
+      createdAt: now,
+      updatedAt: now,
+    );
+  }
+
   factory AIConfigModel.createCustom({
     required String baseUrl,
     required String apiKey,
@@ -90,13 +112,25 @@ class AIConfigModel extends Equatable {
   }
 
   AIConfigModel copyWith({
-    String? id, AIProviderType? providerType, String? apiKey,
-    String? baseUrl, String? modelId, String? modelName,
-    String? modelCapabilities, AISetupMode? setupMode,
-    Map<String, String>? customHeaders, double? temperature,
-    double? topP, int? maxTokens, String? systemPrompt,
-    Duration? timeout, bool? isConnected, DateTime? lastTestedAt,
-    String? lastError, DateTime? createdAt, DateTime? updatedAt,
+    String? id,
+    AIProviderType? providerType,
+    String? apiKey,
+    String? baseUrl,
+    String? modelId,
+    String? modelName,
+    String? modelCapabilities,
+    AISetupMode? setupMode,
+    Map<String, String>? customHeaders,
+    double? temperature,
+    double? topP,
+    int? maxTokens,
+    String? systemPrompt,
+    Duration? timeout,
+    bool? isConnected,
+    DateTime? lastTestedAt,
+    String? lastError,
+    DateTime? createdAt,
+    DateTime? updatedAt,
   }) => AIConfigModel(
     id: id ?? this.id,
     providerType: providerType ?? this.providerType,
@@ -120,26 +154,26 @@ class AIConfigModel extends Equatable {
   );
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'providerType': providerType.index,
-    'apiKey': apiKey,
-    'baseUrl': baseUrl,
-    'modelId': modelId,
-    'modelName': modelName,
-    'modelCapabilities': modelCapabilities,
-    'setupMode': setupMode.index,
-    'customHeaders': customHeaders,
-    'temperature': temperature,
-    'topP': topP,
-    'maxTokens': maxTokens,
-    'systemPrompt': systemPrompt,
-    'timeout': timeout.inSeconds,
-    'isConnected': isConnected,
-    'lastTestedAt': lastTestedAt?.toIso8601String(),
-    'lastError': lastError,
-    'createdAt': createdAt.toIso8601String(),
-    'updatedAt': updatedAt.toIso8601String(),
-  };
+        'id': id,
+        'providerType': providerType.index,
+        'apiKey': apiKey,
+        'baseUrl': baseUrl,
+        'modelId': modelId,
+        'modelName': modelName,
+        'modelCapabilities': modelCapabilities,
+        'setupMode': setupMode.index,
+        'customHeaders': customHeaders,
+        'temperature': temperature,
+        'topP': topP,
+        'maxTokens': maxTokens,
+        'systemPrompt': systemPrompt,
+        'timeout': timeout.inSeconds,
+        'isConnected': isConnected,
+        'lastTestedAt': lastTestedAt?.toIso8601String(),
+        'lastError': lastError,
+        'createdAt': createdAt.toIso8601String(),
+        'updatedAt': updatedAt.toIso8601String(),
+      };
 
   factory AIConfigModel.fromJson(Map<String, dynamic> json) => AIConfigModel(
     id: json['id'],
@@ -168,6 +202,17 @@ class AIConfigModel extends Equatable {
     if (apiKey.isEmpty) return '';
     if (apiKey.length <= 8) return '****';
     return '${apiKey.substring(0, 4)}****${apiKey.substring(apiKey.length - 4)}';
+  }
+
+  String get providerLabel {
+    switch (providerType) {
+      case AIProviderType.openRouter:
+        return 'OpenRouter';
+      case AIProviderType.nvidiaNim:
+        return 'NVIDIA NIM';
+      case AIProviderType.customOpenAI:
+        return 'Custom LLM API';
+    }
   }
 
   @override

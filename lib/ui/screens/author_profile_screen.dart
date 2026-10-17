@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../models/author_profile_model.dart';
 import '../../providers/app_providers.dart';
+import '../theme/app_theme.dart';
 
 class AuthorProfileScreen extends ConsumerStatefulWidget {
   final String? novelId;
@@ -43,7 +45,6 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
 
   Future<void> _loadProfile() async {
     final repo = ref.read(authorProfileRepositoryProvider);
-    // Load existing or create new
     final existing = widget.novelId != null
         ? repo.getForNovel(widget.novelId!)
         : repo.all.isNotEmpty ? repo.all.first : null;
@@ -87,77 +88,125 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Kepribadian Penulisan AI'),
+        title: Text('Kepribadian Penulisan AI', style: GoogleFonts.poppins(fontWeight: FontWeight.w600)),
         actions: [
-          IconButton(icon: const Icon(Icons.save), onPressed: _save),
+          IconButton(
+            icon: const Icon(Icons.save_outlined),
+            onPressed: _save,
+            tooltip: 'Simpan Profil',
+          ),
         ],
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Profil Penulisan', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 8),
-            TextField(
-              controller: _nameController,
-              decoration: const InputDecoration(labelText: 'Nama profil', border: OutlineInputBorder()),
+            Text(
+              'Profil Penulisan',
+              style: GoogleFonts.poppins(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: colorScheme.onSurface,
+              ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
+            Text(
+              'Atur gaya penulisan yang menjadi pedoman AI',
+              style: GoogleFonts.poppins(
+                fontSize: 14,
+                color: colorScheme.onSurfaceVariant,
+              ),
+            ),
+            const SizedBox(height: 20),
 
-            // Gaya bahasa
-            const Text('Gaya Bahasa', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18)),
+            // Nama Profil
+            _buildTextField(
+              controller: _nameController,
+              label: 'Nama Profil',
+              hint: 'Contoh: Profil Fantasi, Profil Romansa',
+              icon: Icons.label_outlined,
+              required: true,
+            ),
+            const SizedBox(height: 20),
+
+            // Gaya Bahasa
+            _buildSectionTitle('Gaya Bahasa'),
+            const SizedBox(height: 12),
+            Text(
+              'Pilih satu atau lebih gaya yang Anda sukai',
+              style: GoogleFonts.poppins(
+                fontSize: 12,
+                color: colorScheme.onSurfaceVariant,
+              ),
+            ),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,
+              runSpacing: 8,
               children: WritingStyle.values.map((s) {
                 final selected = _styles.contains(s);
                 return FilterChip(
-                  label: Text(_styleLabel(s)),
+                  label: Text(_styleLabel(s), style: GoogleFonts.poppins(fontSize: 12)),
                   selected: selected,
                   onSelected: (v) => setState(() {
                     if (v) _styles.add(s); else _styles.remove(s);
                   }),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                 );
               }).toList(),
             ),
             if (_styles.contains(WritingStyle.custom)) ...[
-              const SizedBox(height: 8),
-              TextField(
+              const SizedBox(height: 12),
+              _buildTextField(
                 controller: _customStyleController,
-                decoration: const InputDecoration(labelText: 'Gaya khusus', border: OutlineInputBorder()),
+                label: 'Gaya Khusus',
+                hint: 'Deskripsikan gaya penulisan Anda',
+                icon: Icons.edit_outlined,
               ),
             ],
-            const SizedBox(height: 16),
+            const SizedBox(height: 20),
 
-            // Custom instructions
-            const Text('Instruksi Khusus', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18)),
+            // Instruksi Khusus
+            _buildSectionTitle('Instruksi Khusus'),
+            const SizedBox(height: 12),
+            Text(
+              'Contoh: Tulis dengan bahasa Indonesia yang natural, dialog tidak kaku, deskripsi secukupnya',
+              style: GoogleFonts.poppins(
+                fontSize: 12,
+                color: colorScheme.onSurfaceVariant,
+              ),
+            ),
             const SizedBox(height: 8),
             TextField(
               controller: _freeFormController,
-              decoration: const InputDecoration(
-                labelText: 'Instruksi bebas',
-                hintText: 'Contoh: Tulis dengan bahasa Indonesia yang natural, dialog tidak kaku...',
-                border: OutlineInputBorder(),
-              ),
               maxLines: 3,
+              decoration: InputDecoration(
+                hintText: 'Masukkan instruksi bebas untuk AI',
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+              ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 20),
 
-            // Parameter penulisan (kartu)
-            const Text('Parameter Penulisan', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18)),
-            const SizedBox(height: 8),
+            // Parameter Penulisan
+            _buildSectionTitle('Parameter Penulisan'),
+            const SizedBox(height: 12),
             _buildParamCard(
               title: 'Sudut Pandang',
               child: DropdownButtonFormField<POV>(
                 value: _pov,
                 items: POV.values.map((p) => DropdownMenuItem(
                   value: p,
-                  child: Text(_povLabel(p)),
+                  child: Text(_povLabel(p), style: GoogleFonts.poppins(fontSize: 14)),
                 )).toList(),
                 onChanged: (v) => setState(() => _pov = v!),
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                ),
               ),
             ),
             _buildParamCard(
@@ -166,9 +215,12 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
                 value: _tense,
                 items: Tense.values.map((t) => DropdownMenuItem(
                   value: t,
-                  child: Text(_tenseLabel(t)),
+                  child: Text(_tenseLabel(t), style: GoogleFonts.poppins(fontSize: 14)),
                 )).toList(),
                 onChanged: (v) => setState(() => _tense = v!),
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                ),
               ),
             ),
             _buildSliderCard('Panjang Paragraf', _paragraphLength, (v) => setState(() => _paragraphLength = v.round())),
@@ -182,13 +234,27 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
               title: 'Target Kata per Bab',
               child: TextField(
                 controller: _targetWordController,
-                decoration: const InputDecoration(hintText: '2000', border: OutlineInputBorder()),
+                decoration: const InputDecoration(
+                  hintText: '2000',
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                ),
                 keyboardType: TextInputType.number,
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildSectionTitle(String title) {
+    return Text(
+      title,
+      style: GoogleFonts.poppins(
+        fontSize: 16,
+        fontWeight: FontWeight.w700,
+        color: Theme.of(context).colorScheme.onSurface,
       ),
     );
   }
@@ -196,11 +262,11 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
   Widget _buildParamCard({required String title, required Widget child}) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: const TextStyle(fontWeight: FontWeight.w500)),
+            Text(title, style: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 14)),
             const SizedBox(height: 8),
             child,
           ],
@@ -212,19 +278,25 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
   Widget _buildSliderCard(String title, int value, void Function(int) onChanged) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(title, style: const TextStyle(fontWeight: FontWeight.w500)),
-                Text('$value/5', style: const TextStyle(fontSize: 12, color: Colors.grey)),
+                Text(title, style: GoogleFonts.poppins(fontWeight: FontWeight.w500, fontSize: 14)),
+                Text('$value/5', style: GoogleFonts.poppins(fontSize: 12, color: Colors.grey)),
               ],
             ),
             const SizedBox(height: 8),
-            Slider(value: value.toDouble(), min: 1, max: 5, divisions: 4, onChanged: (v) => onChanged(v.round())),
+            Slider(
+              value: value.toDouble(),
+              min: 1,
+              max: 5,
+              divisions: 4,
+              onChanged: (v) => onChanged(v.round()),
+            ),
           ],
         ),
       ),
@@ -255,9 +327,47 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
 
   String _tenseLabel(Tense t) => t == Tense.past ? 'Lampau' : 'Sekarang';
 
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String label,
+    required String hint,
+    required IconData icon,
+    bool required = false,
+    int maxLines = 1,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label + (required ? ' *' : ''),
+          style: GoogleFonts.poppins(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
+        ),
+        const SizedBox(height: 8),
+        TextField(
+          controller: controller,
+          maxLines: maxLines,
+          decoration: InputDecoration(
+            hintText: hint,
+            prefixIcon: Icon(icon, size: 20),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+          ),
+        ),
+      ],
+    );
+  }
+
   Future<void> _save() async {
     if (_nameController.text.trim().isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Nama profil wajib diisi')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Nama profil wajib diisi', style: GoogleFonts.poppins()),
+          backgroundColor: Theme.of(context).colorScheme.error,
+        ),
+      );
       return;
     }
 
@@ -290,7 +400,12 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
 
     await ref.read(authorProfileRepositoryProvider).save(profile);
     if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Profil penulis disimpan')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Profil penulis disimpan', style: GoogleFonts.poppins()),
+          backgroundColor: Colors.green.shade700,
+        ),
+      );
       Navigator.pop(context);
     }
   }

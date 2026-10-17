@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 
 import '../models/ai_config_model.dart';
 import 'ai_providers.dart';
+import 'nvidia_provider.dart';
 import 'openrouter_provider.dart';
 
 class CustomOpenAIProvider implements AIProvider {
@@ -244,6 +245,8 @@ class AIProviderFactory {
     switch (config.providerType) {
       case AIProviderType.openRouter:
         return OpenRouterProvider(config: config);
+      case AIProviderType.nvidiaNim:
+        return NvidiaNimProvider(config: config);
       case AIProviderType.customOpenAI:
         return CustomOpenAIProvider(config: config);
     }

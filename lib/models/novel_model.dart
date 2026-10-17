@@ -10,6 +10,8 @@ class NovelModel extends Equatable {
   final String title;
   final String? description;
   final String? genre;
+  final String? theme;
+  final String? background;
   final String? language;
   final NovelStatus status;
   final String? aiProfileId;
@@ -21,6 +23,8 @@ class NovelModel extends Equatable {
     required this.title,
     this.description,
     this.genre,
+    this.theme,
+    this.background,
     this.language,
     this.status = NovelStatus.drafting,
     this.aiProfileId,
@@ -32,6 +36,8 @@ class NovelModel extends Equatable {
     required String title,
     String? description,
     String? genre,
+    String? theme,
+    String? background,
     String? language,
     String? aiProfileId,
   }) {
@@ -41,6 +47,8 @@ class NovelModel extends Equatable {
       title: title,
       description: description,
       genre: genre,
+      theme: theme,
+      background: background,
       language: language,
       status: NovelStatus.drafting,
       aiProfileId: aiProfileId,
@@ -54,6 +62,8 @@ class NovelModel extends Equatable {
     String? title,
     String? description,
     String? genre,
+    String? theme,
+    String? background,
     String? language,
     NovelStatus? status,
     String? aiProfileId,
@@ -65,6 +75,8 @@ class NovelModel extends Equatable {
       title: title ?? this.title,
       description: description ?? this.description,
       genre: genre ?? this.genre,
+      theme: theme ?? this.theme,
+      background: background ?? this.background,
       language: language ?? this.language,
       status: status ?? this.status,
       aiProfileId: aiProfileId ?? this.aiProfileId,
@@ -78,6 +90,8 @@ class NovelModel extends Equatable {
         'title': title,
         'description': description,
         'genre': genre,
+        'theme': theme,
+        'background': background,
         'language': language,
         'status': status.index,
         'aiProfileId': aiProfileId,
@@ -90,6 +104,8 @@ class NovelModel extends Equatable {
         title: json['title'] as String,
         description: json['description'] as String?,
         genre: json['genre'] as String?,
+        theme: json['theme'] as String?,
+        background: json['background'] as String?,
         language: json['language'] as String?,
         status: NovelStatus.values[json['status'] as int],
         aiProfileId: json['aiProfileId'] as String?,
@@ -99,5 +115,5 @@ class NovelModel extends Equatable {
 
   @override
   List<Object?> get props =>
-      [id, title, description, genre, language, status, aiProfileId, createdAt, updatedAt];
+      [id, title, description, genre, theme, background, language, status, aiProfileId, createdAt, updatedAt];
 }

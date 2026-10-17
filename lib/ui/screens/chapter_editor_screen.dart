@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../models/chapter_model.dart';
 import '../../providers/app_providers.dart';
-import '../../services/ai_providers.dart';
+import '../theme/app_theme.dart';
 import '../widgets/ai_action_button.dart';
 
 class ChapterEditorScreen extends ConsumerStatefulWidget {
@@ -37,13 +38,18 @@ class _ChapterEditorScreenState extends ConsumerState<ChapterEditorScreen> {
   Widget build(BuildContext context) {
     final status = ref.watch(generationStatusProvider);
     final generated = ref.watch(generatedTextProvider);
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bab ${widget.chapter.number}: ${widget.chapter.title}'),
+        title: Text(
+          'Bab ${widget.chapter.number}: ${widget.chapter.title}',
+          style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+        ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.auto_awesome),
+            icon: const Icon(Icons.auto_awesome_outlined),
+            tooltip: 'Tulis dengan AI',
             onPressed: () => _showAIMenu(context),
           ),
           PopupMenuButton<String>(
@@ -51,9 +57,27 @@ class _ChapterEditorScreenState extends ConsumerState<ChapterEditorScreen> {
               if (value == 'save') _save();
               if (value == 'revision') _showRevisionHistory();
             },
-            itemBuilder: (_) => const [
-              PopupMenuItem(value: 'save', child: Text('Simpan')),
-              PopupMenuItem(value: 'revision', child: Text('Riwayat Revisi')),
+            itemBuilder: (_) => [
+              PopupMenuItem(
+                value: 'save',
+                child: Row(
+                  children: [
+                    const Icon(Icons.save_outlined, size: 18),
+                    const SizedBox(width: 8),
+                    Text('Simpan', style: GoogleFonts.poppins()),
+                  ],
+                ),
+              ),
+              PopupMenuItem(
+                value: 'revision',
+                child: Row(
+                  children: [
+                    const Icon(Icons.history_outlined, size: 18),
+                    const SizedBox(width: 8),
+                    Text('Riwayat Revisi', style: GoogleFonts.poppins()),
+                  ],
+                ),
+              ),
             ],
           ),
         ],
@@ -73,7 +97,7 @@ class _ChapterEditorScreenState extends ConsumerState<ChapterEditorScreen> {
                 decoration: InputDecoration(
                   hintText: 'Mulai menulis bab di sini...',
                   border: InputBorder.none,
-                  hintStyle: const TextStyle(color: Colors.grey),
+                  hintStyle: TextStyle(color: colorScheme.onSurfaceVariant),
                 ),
                 onChanged: (_) => setState(() {}),
               ),
@@ -83,41 +107,78 @@ class _ChapterEditorScreenState extends ConsumerState<ChapterEditorScreen> {
             const LinearProgressIndicator(),
           Padding(
             padding: const EdgeInsets.all(16),
-            child: Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('${_contentController.text.split(' ').length} kata'),
-                const Spacer(),
-                if (generated.isNotEmpty && status != AIRequestStatus.streaming)
-                  AIActionButton(
-                    label: 'Ganti Teks',
-                    onPressed: () => _replaceText(generated),
-                    icon: Icons.refresh,
-                  ),
-                if (generated.isNotEmpty && status != AIRequestStatus.streaming)
-                  AIActionButton(
-                    label: 'Sisipkan',
-                    onPressed: () => _insertText(generated),
-                    icon: Icons.add,
-                  ),
-                if (generated.isNotEmpty && status != AIRequestStatus.streaming)
-                  AIActionButton(
-                    label: 'Salin',
-                    onPressed: () => _copyText(generated),
-                    icon: Icons.copy,
-                  ),
-                const SizedBox(width: 8),
-                ElevatedButton.icon(
-                  icon: const Icon(Icons.edit),
-                  label: Text(_isEditing ? 'Selesai' : 'Edit'),
-                  onPressed: () {
-                    if (!_isEditing) {
-                      setState(() => _isEditing = true);
-                    } else {
-                      _save();
-                      setState(() => _isEditing = false);
-                    }
-                  },
+                Row(
+                  children: [
+                    Text(
+                      '${_contentController.text.split(' ').length} kata',
+                      style: GoogleFonts.poppins(
+                        fontSize: 12,
+                        color: colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                    const Spacer(),
+                    if (generated.isNotEmpty && status != AIRequestStatus.streaming)
+                      AIActionButton(
+                        label: 'Ganti Teks',
+                        onPressed: () => _replaceText(generated),
+                        icon: Icons.refresh_outlined,
+                      ),
+                    if (generated.isNotEmpty && status != AIRequestStatus.streaming)
+                      AIActionButton(
+                        label: 'Sisipkan',
+                        onPressed: () => _insertText(generated),
+                        icon: Icons.add_outlined,
+                      ),
+                    if (generated.isNotEmpty && status != AIRequestStatus.streaming)
+                      AIActionButton(
+                        label: 'Salin',
+                        onPressed: () => _copyText(generated),
+                        icon: Icons.content_copy_outlined,
+                      ),
+                    const SizedBox(width: 8),
+                    OutlinedButton.icon(
+                      icon: Icon(_isEditing ? Icons.check_outlined : Icons.edit_outlined),
+                      label: Text(_isEditing ? 'Selesai' : 'Edit'),
+                      onPressed: () {
+                        if (!_isEditing) {
+                          setState(() => _isEditing = true);
+                        } else {
+                          _save();
+                          setState(() => _isEditing = false);
+                        }
+                      },
+                    ),
+                  ],
                 ),
+                if (generated.isNotEmpty && status != AIRequestStatus.streaming) ...[
+                  const SizedBox(height: 12),
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.green.shade50,
+                      border: Border.all(color: Colors.green.shade200),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.auto_awesome, color: Colors.green, size: 20),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            'Hasil AI siap diterapkan',
+                            style: GoogleFonts.poppins(
+                              fontSize: 12,
+                              color: Colors.green.shade700,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ],
             ),
           ),
@@ -137,25 +198,92 @@ class _ChapterEditorScreenState extends ConsumerState<ChapterEditorScreen> {
       ),
     );
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Disimpan')),
+      SnackBar(
+        content: Text('Disimpan', style: GoogleFonts.poppins()),
+        backgroundColor: Colors.green.shade700,
+        duration: const Duration(seconds: 2),
+      ),
     );
   }
 
   void _showAIMenu(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      builder: (_) => Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          ListTile(title: Text('Tulis dengan AI'), leading: Icon(Icons.auto_awesome)),
-          ListTile(title: Text('Lanjutkan dari sini'), leading: Icon(Icons.play_arrow)),
-          ListTile(title: Text('Tulis ulang pilihan'), leading: Icon(Icons.refresh)),
-          ListTile(title: Text('Perbaiki dialog'), leading: Icon(Icons.chat)),
-          ListTile(title: Text('Perluas adegan'), leading: Icon(Icons.expand)),
-          ListTile(title: Text('Ringkas'), leading: Icon(Icons.description)),
-          ListTile(title: Text('Periksa kontinuitas'), leading: Icon(Icons.verified)),
-        ],
+      builder: (_) => Container(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Tulis dengan AI',
+              style: GoogleFonts.poppins(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 16),
+            _buildAIListTile(
+              context,
+              icon: Icons.auto_awesome_outlined,
+              title: 'Generate Bab Lengkap',
+              subtitle: 'Buat bab baru dari outline dan Story Bible',
+            ),
+            _buildAIListTile(
+              context,
+              icon: Icons.play_arrow_outlined,
+              title: 'Lanjutkan dari Sini',
+              subtitle: 'Lanjutkan tulisan dari posisi kursor',
+            ),
+            _buildAIListTile(
+              context,
+              icon: Icons.refresh_outlined,
+              title: 'Tulis Ulang Pilihan',
+              subtitle: 'Revisikan teks yang dipilih',
+            ),
+            _buildAIListTile(
+              context,
+              icon: Icons.chat_outlined,
+              title: 'Perbaiki Dialog',
+              subtitle: 'Buat dialog lebih natural',
+            ),
+            _buildAIListTile(
+              context,
+              icon: Icons.expand_outlined,
+              title: 'Perluas Adegan',
+              subtitle: 'Tambahkan deskripsi dan detail',
+            ),
+            _buildAIListTile(
+              context,
+              icon: Icons.summary_outlined,
+              title: 'Ringkas',
+              subtitle: 'Buat ringkasan bab',
+            ),
+            _buildAIListTile(
+              context,
+              icon: Icons.verified_outlined,
+              title: 'Periksa Kontinuitas',
+              subtitle: 'Validasi konsistensi cerita',
+            ),
+            const SizedBox(height: 16),
+          ],
+        ),
       ),
+    );
+  }
+
+  Widget _buildAIListTile(
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required String subtitle,
+  }) {
+    return ListTile(
+      leading: Icon(icon, color: Theme.of(context).colorScheme.primary),
+      title: Text(title, style: GoogleFonts.poppins(fontWeight: FontWeight.w500)),
+      subtitle: Text(subtitle, style: GoogleFonts.poppins(fontSize: 12)),
+      onTap: () {
+        Navigator.pop(context);
+      },
     );
   }
 
@@ -171,9 +299,12 @@ class _ChapterEditorScreenState extends ConsumerState<ChapterEditorScreen> {
   }
 
   void _copyText(String text) {
-    // Clipboard copy would go here
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Disalin ke clipboard')),
+      SnackBar(
+        content: Text('Disalin ke clipboard', style: GoogleFonts.poppins()),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        duration: const Duration(seconds: 2),
+      ),
     );
   }
 
@@ -181,10 +312,16 @@ class _ChapterEditorScreenState extends ConsumerState<ChapterEditorScreen> {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('Riwayat Revisi'),
-        content: const Text('Fitur riwayat revisi akan ditampilkan di sini.'),
+        title: Text('Riwayat Revisi', style: GoogleFonts.poppins()),
+        content: Text(
+          'Fitur riwayat revisi akan ditampilkan di sini.',
+          style: GoogleFonts.poppins(fontSize: 14),
+        ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Tutup')),
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('Tutup', style: GoogleFonts.poppins()),
+          ),
         ],
       ),
     );
