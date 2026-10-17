@@ -1,0 +1,35 @@
+name: Build Novelku Android APK
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0'
+          channel: 'stable'
+
+      - run: flutter pub get
+        working-directory: Novelku
+
+      - run: flutter analyze
+        working-directory: Novelku
+
+      - run: flutter test
+        working-directory: Novelku
+
+      - run: flutter build apk --release --split-per-abi
+        working-directory: Novelku
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: novelku-apk-armv7l
+          path: Novelku/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
