@@ -21,8 +21,6 @@ dependencies:
   share_plus: ^7.2.1
   package_info_plus: ^5.0.1
   shared_preferences: ^2.2.2
-  docx: ^2.0.1
-  archive: ^3.4.0
   path: ^1.8.3
   crypto: ^3.0.3
   equatable: ^2.0.5
