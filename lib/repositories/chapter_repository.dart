@@ -1,4 +1,4 @@
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
 import '../models/chapter_model.dart';
 import '../models/novel_model.dart';
 

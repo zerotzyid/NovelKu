@@ -1,4 +1,4 @@
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
 import '../models/generation_history_model.dart';
 
 class GenerationHistoryRepository {
