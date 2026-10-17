@@ -1,7 +1,7 @@
 include ':app'
 
 def localProperties = new Properties()
-def localPropertiesFile = rootDir.file('local.properties')
+def localPropertiesFile = file('local.properties')
 if (localPropertiesFile.exists()) {
     localProperties.load(new FileInputStream(localPropertiesFile))
 }
