@@ -9,13 +9,12 @@ import 'models/chapter_model.dart';
 import 'models/generation_history_model.dart';
 import 'models/novel_model.dart';
 import 'models/story_bible_model.dart';
-import 'providers/app_providers.dart';
 import 'ui/screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final dir = await getApplicationDocumentsDirectory();
-  await Hive.init(dir.path);
+  Hive.init(dir.path);
 
   Hive.registerAdapter(NovelModelAdapter());
   Hive.registerAdapter(ChapterModelAdapter());
@@ -60,7 +59,7 @@ class NovelModelAdapter extends TypeAdapter<NovelModel> {
   final int typeId = 0;
   @override
   NovelModel read(BinaryReader reader) {
-    final map = reader.readMap() as Map;
+    final map = reader.readMap();
     return NovelModel.fromJson(Map<String, dynamic>.from(map));
   }
 
@@ -75,7 +74,7 @@ class ChapterModelAdapter extends TypeAdapter<ChapterModel> {
   final int typeId = 1;
   @override
   ChapterModel read(BinaryReader reader) {
-    final map = reader.readMap() as Map;
+    final map = reader.readMap();
     return ChapterModel.fromJson(Map<String, dynamic>.from(map));
   }
 
@@ -90,7 +89,7 @@ class StoryBibleModelAdapter extends TypeAdapter<StoryBibleModel> {
   final int typeId = 2;
   @override
   StoryBibleModel read(BinaryReader reader) {
-    final map = reader.readMap() as Map;
+    final map = reader.readMap();
     return StoryBibleModel.fromJson(Map<String, dynamic>.from(map));
   }
 
@@ -105,7 +104,7 @@ class WorldModelAdapter extends TypeAdapter<WorldModel> {
   final int typeId = 3;
   @override
   WorldModel read(BinaryReader reader) {
-    final map = reader.readMap() as Map;
+    final map = reader.readMap();
     return WorldModel.fromJson(Map<String, dynamic>.from(map));
   }
 
@@ -120,7 +119,7 @@ class CharacterModelAdapter extends TypeAdapter<CharacterModel> {
   final int typeId = 4;
   @override
   CharacterModel read(BinaryReader reader) {
-    final map = reader.readMap() as Map;
+    final map = reader.readMap();
     return CharacterModel.fromJson(Map<String, dynamic>.from(map));
   }
 
@@ -135,7 +134,7 @@ class PlotModelAdapter extends TypeAdapter<PlotModel> {
   final int typeId = 5;
   @override
   PlotModel read(BinaryReader reader) {
-    final map = reader.readMap() as Map;
+    final map = reader.readMap();
     return PlotModel.fromJson(Map<String, dynamic>.from(map));
   }
 
@@ -150,7 +149,7 @@ class AIConfigModelAdapter extends TypeAdapter<AIConfigModel> {
   final int typeId = 6;
   @override
   AIConfigModel read(BinaryReader reader) {
-    final map = reader.readMap() as Map;
+    final map = reader.readMap();
     return AIConfigModel.fromJson(Map<String, dynamic>.from(map));
   }
 
@@ -165,7 +164,7 @@ class AuthorProfileModelAdapter extends TypeAdapter<AuthorProfileModel> {
   final int typeId = 7;
   @override
   AuthorProfileModel read(BinaryReader reader) {
-    final map = reader.readMap() as Map;
+    final map = reader.readMap();
     return AuthorProfileModel.fromJson(Map<String, dynamic>.from(map));
   }
 
@@ -180,7 +179,7 @@ class GenerationHistoryModelAdapter extends TypeAdapter<GenerationHistoryModel> 
   final int typeId = 8;
   @override
   GenerationHistoryModel read(BinaryReader reader) {
-    final map = reader.readMap() as Map;
+    final map = reader.readMap();
     return GenerationHistoryModel.fromJson(Map<String, dynamic>.from(map));
   }
 

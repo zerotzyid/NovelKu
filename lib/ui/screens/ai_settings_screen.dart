@@ -12,14 +12,12 @@ class AISettingsScreen extends ConsumerStatefulWidget {
 }
 
 class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
-  int _step = 0;
   AIProviderType _provider = AIProviderType.openRouter;
   final _apiKeyController = TextEditingController();
   final _baseUrlController = TextEditingController(text: 'https://openrouter.ai/api/v1/chat/completions');
   final _modelController = TextEditingController();
   bool _isTesting = false;
   String? _testResult;
-  bool _advanced = false;
   final _systemPromptController = TextEditingController();
   final _temperatureController = TextEditingController(text: '0.7');
   final _maxTokensController = TextEditingController(text: '4096');

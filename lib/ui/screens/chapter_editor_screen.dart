@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../models/author_profile_model.dart';
 import '../../models/chapter_model.dart';
-import '../../models/story_bible_model.dart';
 import '../../providers/app_providers.dart';
 import '../../services/ai_providers.dart';
 import '../widgets/ai_action_button.dart';
@@ -93,7 +91,7 @@ class _ChapterEditorScreenState extends ConsumerState<ChapterEditorScreen> {
                   AIActionButton(
                     label: 'Ganti Teks',
                     onPressed: () => _replaceText(generated),
-                    icon: Icons.replace,
+                    icon: Icons.refresh,
                   ),
                 if (generated.isNotEmpty && status != AIRequestStatus.streaming)
                   AIActionButton(
@@ -148,13 +146,13 @@ class _ChapterEditorScreenState extends ConsumerState<ChapterEditorScreen> {
       context: context,
       builder: (_) => Column(
         mainAxisSize: MainAxisSize.min,
-        children: const [
+        children: [
           ListTile(title: Text('Tulis dengan AI'), leading: Icon(Icons.auto_awesome)),
           ListTile(title: Text('Lanjutkan dari sini'), leading: Icon(Icons.play_arrow)),
           ListTile(title: Text('Tulis ulang pilihan'), leading: Icon(Icons.refresh)),
           ListTile(title: Text('Perbaiki dialog'), leading: Icon(Icons.chat)),
           ListTile(title: Text('Perluas adegan'), leading: Icon(Icons.expand)),
-          ListTile(title: Text('Ringkas'), leading: Icon(Icons.summary)),
+          ListTile(title: Text('Ringkas'), leading: Icon(Icons.description)),
           ListTile(title: Text('Periksa kontinuitas'), leading: Icon(Icons.verified)),
         ],
       ),

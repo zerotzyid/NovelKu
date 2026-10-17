@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../models/novel_model.dart';
 import '../providers/app_providers.dart';
 import 'novel_detail_screen.dart';
 import 'ai_settings_screen.dart';

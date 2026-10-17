@@ -1,5 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../models/ai_config_model.dart';
+import '../models/chapter_model.dart';
+import '../models/novel_model.dart';
 import '../repositories/ai_settings_repository.dart';
 import '../repositories/author_profile_repository.dart';
 import '../repositories/chapter_repository.dart';
@@ -70,10 +73,11 @@ class AIConfigNotifier extends StateNotifier<AIConfigModel?> {
   }
 
   Future<bool> testConnection() async {
-    if (state == null) return false;
-    final provider = AIProviderFactory.create(state!);
+    final current = state;
+    if (current == null) return false;
+    final provider = AIProviderFactory.create(current);
     final result = await provider.testConnection();
-    state = state!.copyWith(isConnected: result);
+    state = current.copyWith(isConnected: result);
     return result;
   }
 

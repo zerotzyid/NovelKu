@@ -1,9 +1,7 @@
 import 'dart:async';
-import 'package:http/http.dart' as http;
 
 import '../models/ai_config_model.dart';
 import '../models/author_profile_model.dart';
-import '../models/chapter_model.dart';
 import '../models/generation_history_model.dart';
 import '../models/story_bible_model.dart';
 
@@ -79,7 +77,7 @@ class AIProviderException implements Exception {
     this.statusCode,
     this.isAuthError = false,
     this.isRateLimit = false,
-  }) : super(message);
+  });
 
   @override
   String toString() => 'AIProviderException: $message';

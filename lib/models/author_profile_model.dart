@@ -67,7 +67,7 @@ class AuthorProfileModel extends Equatable {
   factory AuthorProfileModel.createGlobal({required String name}) {
     final now = DateTime.now();
     return AuthorProfileModel(
-      id: _uuid.v4(), name: name,
+      id: _uuid.v4(), name: name, styles: const [],
       pointOfView: POV.thirdPersonLimited, tense: Tense.past,
       createdAt: now, updatedAt: now,
     );
@@ -78,7 +78,7 @@ class AuthorProfileModel extends Equatable {
   }) {
     final now = DateTime.now();
     return AuthorProfileModel(
-      id: _uuid.v4(), novelId: novelId, name: name,
+      id: _uuid.v4(), novelId: novelId, name: name, styles: const [],
       pointOfView: POV.thirdPersonLimited, tense: Tense.past,
       createdAt: now, updatedAt: now,
     );

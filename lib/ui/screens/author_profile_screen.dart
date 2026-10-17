@@ -42,7 +42,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
   }
 
   Future<void> _loadProfile() async {
-    final repo = ref.read(authorProfileRepositoryProvider.notifier);
+    final repo = ref.read(authorProfileRepositoryProvider);
     // Load existing or create new
     final existing = widget.novelId != null
         ? repo.getForNovel(widget.novelId!)
@@ -288,7 +288,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
       updatedAt: DateTime.now(),
     );
 
-    await ref.read(authorProfileRepositoryProvider.notifier).save(profile);
+    await ref.read(authorProfileRepositoryProvider).save(profile);
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Profil penulis disimpan')));
       Navigator.pop(context);

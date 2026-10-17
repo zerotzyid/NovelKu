@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../models/story_bible_model.dart';
-import '../../models/author_profile_model.dart';
 import '../../providers/app_providers.dart';
 import 'author_profile_screen.dart';
 
@@ -14,15 +12,25 @@ class StoryBibleScreen extends ConsumerStatefulWidget {
   ConsumerState<StoryBibleScreen> createState() => _StoryBibleScreenState();
 }
 
-class _StoryBibleScreenState extends ConsumerState<StoryBibleScreen> {
-  int _tab = 0; // 0=world, 1=characters, 2=plot
+class _StoryBibleScreenState extends ConsumerState<StoryBibleScreen>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+  int _tab = 0;
+
   final _worldNameController = TextEditingController();
   final _worldPeriodController = TextEditingController();
   final _premiseController = TextEditingController();
   final _conflictController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+  }
+
+  @override
   void dispose() {
+    _tabController.dispose();
     _worldNameController.dispose();
     _worldPeriodController.dispose();
     _premiseController.dispose();
@@ -32,35 +40,24 @@ class _StoryBibleScreenState extends ConsumerState<StoryBibleScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final bibleAsync = ref.watch(storyBibleRepositoryProvider);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Story Bible'),
-        actions: [
-          IconButton(icon: const Icon(Icons.save), onPressed: () {}),
-        ],
+        bottom: TabBar(
+          controller: _tabController,
+          tabs: const [
+            Tab(text: 'Dunia Cerita'),
+            Tab(text: 'Karakter'),
+            Tab(text: 'Alur Cerita'),
+          ],
+        ),
       ),
-      body: Column(
+      body: TabBarView(
+        controller: _tabController,
         children: [
-          TabBar(
-            controller: TabController(length: 3, vsync: const TabController(length: 3, initialIndex: 0)),
-            tabs: const [
-              Tab(text: 'Dunia Cerita'),
-              Tab(text: 'Karakter'),
-              Tab(text: 'Alur Cerita'),
-            ],
-          ),
-          Expanded(
-            child: TabBarView(
-              controller: TabController(length: 3, vsync: const TabController(length: 3, initialIndex: 0)),
-              children: [
-                _buildWorldTab(),
-                _buildCharactersTab(),
-                _buildPlotTab(),
-              ],
-            ),
-          ),
+          _buildWorldTab(),
+          _buildCharactersTab(),
+          _buildPlotTab(),
         ],
       ),
       floatingActionButton: FloatingActionButton(
