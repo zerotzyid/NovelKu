@@ -75,15 +75,7 @@ class NovelDetailScreen extends ConsumerWidget {
               itemCount: chapters.length,
               itemBuilder: (context, index) {
                 final chapter = chapters[index];
-                return _ChapterCard(
-                  chapter: chapter,
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => ChapterEditorScreen(novelId: novel.id, chapter: chapter),
-                    ),
-                  ),
-                  onDelete: () => _deleteChapter(ref, context, chapter),
-                );
+                return _buildChapterCard(context, ref, chapter);
               },
             ),
       floatingActionButton: FloatingActionButton.extended(
@@ -94,7 +86,7 @@ class NovelDetailScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildChapterCard(BuildContext context, ChapterModel chapter) {
+  Widget _buildChapterCard(BuildContext context, WidgetRef ref, ChapterModel chapter) {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Card(
