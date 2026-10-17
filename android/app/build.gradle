@@ -1,7 +1,7 @@
 plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-    id 'dev.flutter.flutter-gradle-plugin'
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
 }
 
 def localProperties = new Properties()
@@ -19,7 +19,8 @@ def flutterVersionCode = localProperties.getProperty('flutterVersionCode')
 def flutterVersionName = localProperties.getProperty('flutterVersionName')
 
 android {
-    compileSdkVersion 33
+    namespace "com.example.novelku"
+    compileSdk 34
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -27,9 +28,8 @@ android {
 
     defaultConfig {
         applicationId "com.example.novelku"
-        namespace "com.example.novelku"
-        minSdkVersion 21
-        targetSdkVersion 33
+        minSdk 21
+        targetSdk 34
         versionCode flutterVersionCode?.toInteger() ?: 1
         versionName flutterVersionName ?: "1.0.0"
     }
@@ -39,7 +39,6 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled false
             shrinkResources false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
@@ -50,15 +49,6 @@ android {
 
     kotlinOptions {
         jvmTarget = '1.8'
-    }
-
-    packaging {
-        resources {
-            excludes += [
-                'META-INF/AL2.0',
-                'META-INF/LGPL2.1',
-            ]
-        }
     }
 }
 
