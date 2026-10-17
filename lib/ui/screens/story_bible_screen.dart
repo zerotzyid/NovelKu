@@ -15,7 +15,6 @@ class StoryBibleScreen extends ConsumerStatefulWidget {
 class _StoryBibleScreenState extends ConsumerState<StoryBibleScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  int _tab = 0;
 
   final _worldNameController = TextEditingController();
   final _worldPeriodController = TextEditingController();
