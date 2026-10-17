@@ -24,6 +24,7 @@ subprojects {
         apply plugin: 'com.android.library'
         android {
             compileSdk 33
+            namespace "com.example.novelku.plugin.${project.name}"
         }
     }
 }
