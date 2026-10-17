@@ -6,6 +6,7 @@ import '../../providers/app_providers.dart';
 import '../../services/ai_providers.dart';
 import '../theme/app_theme.dart';
 import '../widgets/ai_action_button.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ChapterEditorScreen extends ConsumerStatefulWidget {
   final String novelId;

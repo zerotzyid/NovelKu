@@ -5,6 +5,7 @@ import '../models/novel_model.dart';
 import '../providers/app_providers.dart';
 import '../theme/app_theme.dart';
 import 'home_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class NovelCreateScreen extends ConsumerStatefulWidget {
   const NovelCreateScreen({super.key});

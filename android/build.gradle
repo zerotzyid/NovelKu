@@ -20,6 +20,9 @@ allprojects {
 rootProject.buildDir = '../build'
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
+    if (project.name != 'app') {
+        apply plugin: 'com.android.library'
+    }
 }
 subprojects {
     project.evaluationDependsOn(':app')
