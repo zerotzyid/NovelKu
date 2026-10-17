@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../models/author_profile_model.dart';
 import '../../providers/app_providers.dart';
@@ -92,7 +91,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Kepribadian Penulisan AI', style: GoogleFonts.poppins(fontWeight: FontWeight.w600)),
+        title: Text('Kepribadian Penulisan AI', style: TextStyle(fontWeight: FontWeight.w600)),
         actions: [
           IconButton(
             icon: const Icon(Icons.save_outlined),
@@ -151,7 +150,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
               children: WritingStyle.values.map((s) {
                 final selected = _styles.contains(s);
                 return FilterChip(
-                  label: Text(_styleLabel(s), style: GoogleFonts.poppins(fontSize: 12)),
+                  label: Text(_styleLabel(s), style: TextStyle(fontSize: 12)),
                   selected: selected,
                   onSelected: (v) => setState(() {
                     if (v) _styles.add(s); else _styles.remove(s);
@@ -201,7 +200,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
                 value: _pov,
                 items: POV.values.map((p) => DropdownMenuItem(
                   value: p,
-                  child: Text(_povLabel(p), style: GoogleFonts.poppins(fontSize: 14)),
+                  child: Text(_povLabel(p), style: TextStyle(fontSize: 14)),
                 )).toList(),
                 onChanged: (v) => setState(() => _pov = v!),
                 decoration: const InputDecoration(
@@ -215,7 +214,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
                 value: _tense,
                 items: Tense.values.map((t) => DropdownMenuItem(
                   value: t,
-                  child: Text(_tenseLabel(t), style: GoogleFonts.poppins(fontSize: 14)),
+                  child: Text(_tenseLabel(t), style: TextStyle(fontSize: 14)),
                 )).toList(),
                 onChanged: (v) => setState(() => _tense = v!),
                 decoration: const InputDecoration(
@@ -266,7 +265,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 14)),
+            Text(title, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
             const SizedBox(height: 8),
             child,
           ],
@@ -285,8 +284,8 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(title, style: GoogleFonts.poppins(fontWeight: FontWeight.w500, fontSize: 14)),
-                Text('$value/5', style: GoogleFonts.poppins(fontSize: 12, color: Colors.grey)),
+                Text(title, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14)),
+                Text('$value/5', style: TextStyle(fontSize: 12, color: Colors.grey)),
               ],
             ),
             const SizedBox(height: 8),
@@ -364,7 +363,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
     if (_nameController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Nama profil wajib diisi', style: GoogleFonts.poppins()),
+          content: Text('Nama profil wajib diisi', style: TextStyle()),
           backgroundColor: Theme.of(context).colorScheme.error,
         ),
       );
@@ -402,7 +401,7 @@ class _AuthorProfileScreenState extends ConsumerState<AuthorProfileScreen> {
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Profil penulis disimpan', style: GoogleFonts.poppins()),
+          content: Text('Profil penulis disimpan', style: TextStyle()),
           backgroundColor: Colors.green.shade700,
         ),
       );

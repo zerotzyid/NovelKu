@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../models/story_bible_model.dart';
 import '../../models/author_profile_model.dart';
@@ -46,7 +45,7 @@ class _StoryBibleScreenState extends ConsumerState<StoryBibleScreen>
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Story Bible', style: GoogleFonts.poppins(fontWeight: FontWeight.w600)),
+        title: Text('Story Bible', style: TextStyle(fontWeight: FontWeight.w600)),
         bottom: TabBar(
           controller: _tabController,
           indicatorColor: colorScheme.primary,

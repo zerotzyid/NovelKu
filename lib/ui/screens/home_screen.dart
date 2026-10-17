@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../models/novel_model.dart';
 import '../providers/app_providers.dart';
@@ -130,15 +129,15 @@ class HomeScreen extends ConsumerWidget {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
-        title: Text('Hapus "${novel.title}"?', style: GoogleFonts.poppins()),
+        title: Text('Hapus "${novel.title}"?', style: TextStyle()),
         content: Text(
           'Novel ini akan dihapus bersama semua babnya.',
-          style: GoogleFonts.poppins(fontSize: 14),
+          style: TextStyle(fontSize: 14),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: Text('Batal', style: GoogleFonts.poppins()),
+            child: Text('Batal', style: TextStyle()),
           ),
           FilledButton.tonal(
             style: FilledButton.tonal.styleFrom(

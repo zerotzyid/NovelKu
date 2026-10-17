@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../models/ai_config_model.dart';
 import '../providers/app_providers.dart';
@@ -61,7 +60,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pengaturan AI', style: GoogleFonts.poppins(fontWeight: FontWeight.w600)),
+        title: Text('Pengaturan AI', style: TextStyle(fontWeight: FontWeight.w600)),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
@@ -195,7 +194,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
               Wrap(
                 spacing: 8,
                 children: _models.take(6).map((m) => ChoiceChip(
-                  label: Text(m, style: GoogleFonts.poppins(fontSize: 11)),
+                  label: Text(m, style: TextStyle(fontSize: 11)),
                   selected: _modelController.text == m,
                   onSelected: (v) => setState(() => _modelController.text = m),
                 )).toList(),
@@ -337,7 +336,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
       onSelected: (v) => setState(() => _provider = type),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       selectedColor: colorScheme.primary,
-      labelStyle: GoogleFonts.poppins(fontSize: 12),
+      labelStyle: TextStyle(fontSize: 12),
     );
   }
 
@@ -411,7 +410,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
     if (_apiKeyController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('API key wajib diisi terlebih dahulu', style: GoogleFonts.poppins()),
+          content: Text('API key wajib diisi terlebih dahulu', style: TextStyle()),
           backgroundColor: Theme.of(context).colorScheme.error,
         ),
       );
@@ -447,7 +446,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
     if (_apiKeyController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('API key wajib diisi', style: GoogleFonts.poppins()),
+          content: Text('API key wajib diisi', style: TextStyle()),
           backgroundColor: Theme.of(context).colorScheme.error,
         ),
       );
@@ -456,7 +455,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
     if (_modelController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Model wajib diisi', style: GoogleFonts.poppins()),
+          content: Text('Model wajib diisi', style: TextStyle()),
           backgroundColor: Theme.of(context).colorScheme.error,
         ),
       );
@@ -504,7 +503,7 @@ class _AISettingsScreenState extends ConsumerState<AISettingsScreen> {
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Konfigurasi AI disimpan', style: GoogleFonts.poppins()),
+          content: Text('Konfigurasi AI disimpan', style: TextStyle()),
           backgroundColor: Colors.green.shade700,
         ),
       );
